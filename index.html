@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Cargo Acceptance & Receiving Form</title>
-  <style>
-    body { font-family: Arial, sans-serif; background:#f5f7fa; }
-    .container { max-width: 1000px; margin: 20px auto; background:#fff; padding:20px; border-radius:8px; }
-    h1 { font-size:28px; display:inline-block; }
-    .logo { float:right; width:120px; height:80px; } /* تكبير اللوجو */
-    h2 { background:#d32f2f; color:#fff; padding:10px; border-radius:4px; margin-top:20px; }
-    table { width:100%; border-collapse: collapse; margin-bottom:20px; }
-    th, td { border:1px solid #ccc; padding:8px; text-align:left; }
-    th { background:#e9eef3; }
-    input, textarea, select { width:100%; padding:6px; box-sizing: border-box; }
-    .checkbox-group input { width:auto; margin-right:5px; }
-    .submit-btn { background:#d32f2f; color:#fff; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
-    .submit-btn:hover { background:#b71c1c; }
-    textarea.desc { width:100%; } /* تكبير العرض فقط */
-    td.small { width:80px; }
-  </style>
+<meta charset="UTF-8">
+<title>Cargo Acceptance & Receiving Form</title>
+<style>
+body { font-family: Arial, sans-serif; background:#f5f7fa; }
+.container { max-width: 1000px; margin: 20px auto; background:#fff; padding:20px; border-radius:8px; }
+h1 { font-size:28px; display:inline-block; }
+.logo { float:right; width:200px; height:auto; }
+h2 { background:#d32f2f; color:#fff; padding:10px; border-radius:4px; margin-top:20px; }
+table { width:100%; border-collapse: collapse; margin-bottom:20px; }
+th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+th { background:#e9eef3; }
+input, textarea, select { width:100%; padding:6px; box-sizing: border-box; }
+.checkbox-group input { width:auto; margin-right:5px; }
+.submit-btn { background:#d32f2f; color:#fff; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+.submit-btn:hover { background:#b71c1c; }
+textarea.desc { width:100%; } 
+td.small { width:80px; }
+</style>
 </head>
 <body>
 <div class="container">
-  <img src="https://raw.githubusercontent.com/bfouad81/logo/main/logo-artguru.png" alt="Company Logo" class="logo">
-  <h1>Cargo Acceptance & Receiving Form</h1>
-  <div style="clear:both"></div>
+<img src="https://raw.githubusercontent.com/bfouad81/logo/main/logo-artguru.png" alt="Company Logo" class="logo">
+<h1>Cargo Acceptance & Receiving Form</h1>
+<div style="clear:both"></div>
 
 <form method="POST" action="https://formsubmit.co/bassem.fouad81@gmail.com" enctype="multipart/form-data">
 
@@ -74,7 +74,7 @@
 <tr><td>5</td><td><textarea name="desc5" class="desc"></textarea></td><td><input name="pkg5"></td><td><input name="pack5"></td><td><input name="wt5"></td><td><input name="cbm5"></td><td><input name="rem5"></td></tr>
 </table>
 
-<h2>10. Upload Documents</h2>
+<h2>Upload Documents</h2>
 <table>
 <tr><td>Invoice Upload</td><td><input type="file" name="invoice_upload" accept="image/*,application/pdf"></td></tr>
 <tr><td>Certificate of Origin Upload</td><td><input type="file" name="coo_upload" accept="image/*,application/pdf"></td></tr>
@@ -126,7 +126,6 @@
 </table>
 
 <button class="submit-btn" type="submit">Submit Form</button>
-
 </form>
 </div>
 </body>
