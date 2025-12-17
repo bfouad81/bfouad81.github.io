@@ -1,132 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>Cargo Acceptance & Receiving Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cargo Acceptance Form</title>
+
+<!-- CSS -->
 <style>
-body { font-family: Arial, sans-serif; background:#f5f7fa; }
-.container { max-width: 1000px; margin: 20px auto; background:#fff; padding:20px; border-radius:8px; }
-h1 { font-size:28px; display:inline-block; }
-.logo { float:right; width:400px; height:auto; }
-h2 { background:#d32f2f; color:#fff; padding:10px; border-radius:4px; margin-top:20px; }
-table { width:100%; border-collapse: collapse; margin-bottom:20px; }
-th, td { border:1px solid #ccc; padding:8px; text-align:left; }
-th { background:#e9eef3; }
-input, textarea, select { width:100%; padding:6px; box-sizing: border-box; }
-.checkbox-group input { width:auto; margin-right:5px; }
-.submit-btn { background:#d32f2f; color:#fff; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
-.submit-btn:hover { background:#b71c1c; }
-textarea.desc { width:100%; } 
-td.small { width:80px; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Tahoma,Arial;
+background:#f2f4f7;
+padding:10px
+}
+.container{
+max-width:1000px;
+margin:auto;
+background:#fff;
+border-radius:12px;
+padding:15px
+}
+.header{
+text-align:center;
+margin-bottom:15px
+}
+.logo{
+max-width:220px;
+margin:10px auto
+}
+.section{
+margin-bottom:15px;
+background:#f9f9f9;
+padding:10px;
+border-radius:8px
+}
+.section h2{
+background:#c62828;
+color:#fff;
+padding:8px;
+font-size:15px;
+border-radius:6px
+}
+.form-group{
+margin-bottom:8px
+}
+label{
+display:block;
+font-size:13px;
+margin-bottom:3px
+}
+input,textarea{
+width:100%;
+padding:7px;
+font-size:13px;
+border:1px solid #ccc;
+border-radius:5px
+}
+table{
+width:100%;
+font-size:12px;
+margin-top:10px;
+border-collapse:collapse
+}
+th,td{
+border:1px solid #ccc;
+padding:5px;
+text-align:right
+}
+th{
+background:#455a64;
+color:#fff
+}
+.signature{
+margin-top:10px;
+text-align:center
+}
+canvas{
+width:100%;
+height:120px;
+border:2px dashed #c62828;
+border-radius:6px
+}
+button{
+width:100%;
+margin-top:10px;
+padding:12px;
+font-size:15px;
+border:none;
+border-radius:25px;
+cursor:pointer
+}
+.save{
+background:#1976d2;
+color:#fff
+}
+.submit{
+background:#2e7d32;
+color:#fff
+}
 </style>
 </head>
+
 <body>
-<div class="container">
-<img src="https://raw.githubusercontent.com/bfouad81/logo/main/logo-artguru.png" alt="Company Logo" class="logo">
-<h1>Cargo Acceptance & Receiving Form</h1>
-<div style="clear:both"></div>
+<div class="container" id="printArea">
 
-<form method="POST" action="https://formsubmit.co/bassem.fouad81@gmail.com" enctype="multipart/form-data">
-
-<h2>1. Company Information (Receiver)</h2>
-<table>
-<tr><td>Company Name</td><td><input name="receiver_company"></td></tr>
-<tr><td>Address</td><td><input name="receiver_address"></td></tr>
-<tr><td>Contact Person</td><td><input name="receiver_contact"></td></tr>
-<tr><td>Phone / Email</td><td><input name="receiver_phone"></td></tr>
-</table>
-
-<h2>2. Customer / Shipper Information</h2>
-<table>
-<tr><td>Customer / Shipper Name</td><td><input name="shipper_name"></td></tr>
-<tr><td>Company Name (if any)</td><td><input name="shipper_company"></td></tr>
-<tr><td>Address</td><td><input name="shipper_address"></td></tr>
-<tr><td>Contact Person</td><td><input name="shipper_contact"></td></tr>
-<tr><td>Phone / Email</td><td><input name="shipper_phone"></td></tr>
-</table>
-
-<h2>3. Shipment Details</h2>
-<table>
-<tr><td>Shipment Reference No.</td><td><input name="shipment_ref"></td></tr>
-<tr><td>Date Received</td><td><input type="date" name="date_received"> Time <input type="time" name="time_received"></td></tr>
-<tr><td>Mode of Transport</td><td class="checkbox-group">
-<input type="checkbox" name="mode" value="Land"> Land 
-<input type="checkbox" name="mode" value="Air"> Air 
-<input type="checkbox" name="mode" value="Sea"> Sea
-</td></tr>
-<tr><td>Shipment Type</td><td class="checkbox-group">
-<input type="checkbox" name="type" value="LTL"> LTL 
-<input type="checkbox" name="type" value="FTL"> FTL 
-<input type="checkbox" name="type" value="Courier"> Courier 
-<input type="checkbox" name="type" value="Other"> Other
-</td></tr>
-<tr><td>Origin (Pickup Location)</td><td><input name="origin"></td></tr>
-<tr><td>Final Destination</td><td><input name="destination"></td></tr>
-</table>
-
-<h2>4. Cargo Description (As per Shipper)</h2>
-<table>
-<tr><th>No</th><th style="width:40%;">Description of Goods</th><th class="small">No. of Packages</th><th class="small">Packaging Type</th><th class="small">Weight (KG)</th><th class="small">CBM</th><th>Remarks</th></tr>
-<tr><td>1</td><td><textarea name="desc1" class="desc"></textarea></td><td><input name="pkg1"></td><td><input name="pack1"></td><td><input name="wt1"></td><td><input name="cbm1"></td><td><input name="rem1"></td></tr>
-<tr><td>2</td><td><textarea name="desc2" class="desc"></textarea></td><td><input name="pkg2"></td><td><input name="pack2"></td><td><input name="wt2"></td><td><input name="cbm2"></td><td><input name="rem2"></td></tr>
-<tr><td>3</td><td><textarea name="desc3" class="desc"></textarea></td><td><input name="pkg3"></td><td><input name="pack3"></td><td><input name="wt3"></td><td><input name="cbm3"></td><td><input name="rem3"></td></tr>
-<tr><td>4</td><td><textarea name="desc4" class="desc"></textarea></td><td><input name="pkg4"></td><td><input name="pack4"></td><td><input name="wt4"></td><td><input name="cbm4"></td><td><input name="rem4"></td></tr>
-<tr><td>5</td><td><textarea name="desc5" class="desc"></textarea></td><td><input name="pkg5"></td><td><input name="pack5"></td><td><input name="wt5"></td><td><input name="cbm5"></td><td><input name="rem5"></td></tr>
-</table>
-
-<h2>Upload Documents</h2>
-<table>
-<tr><td>Invoice Upload</td><td><input type="file" name="invoice_upload" accept="image/*,application/pdf"></td></tr>
-<tr><td>Certificate of Origin Upload</td><td><input type="file" name="coo_upload" accept="image/*,application/pdf"></td></tr>
-</table>
-
-<h2>5. Documents Received</h2>
-<table>
-<tr><td class="checkbox-group">
-<input type="checkbox" name="docs" value="Invoice"> Invoice 
-<input type="checkbox" name="docs" value="Packing List"> Packing List 
-<input type="checkbox" name="docs" value="CMR"> CMR / Waybill 
-<input type="checkbox" name="docs" value="COO"> Certificate of Origin 
-<input type="checkbox" name="docs" value="MSDS"> MSDS 
-<input type="checkbox" name="docs" value="Other"> Other
-</td></tr>
-</table>
-
-<h2>6. Cargo Condition at Time of Handover</h2>
-<table>
-<tr><td class="checkbox-group">
-<input type="checkbox" name="condition" value="Good"> Good / Intact 
-<input type="checkbox" name="condition" value="Damaged"> Damaged 
-<input type="checkbox" name="condition" value="Weak"> Packaging Noted as Weak
-</td></tr>
-<tr><td>Remarks / Visible Damage Description</td><td><textarea name="condition_remarks"></textarea></td></tr>
-</table>
-
-<h2>7. Special Handling / Instructions</h2>
-<table>
-<tr><td class="checkbox-group">
-<input type="checkbox" name="handling" value="Fragile"> Fragile 
-<input type="checkbox" name="handling" value="Upright"> Keep Upright 
-<input type="checkbox" name="handling" value="Temp"> Temperature Controlled 
-<input type="checkbox" name="handling" value="NoStack"> Do Not Stack 
-<input type="checkbox" name="handling" value="Other"> Other
-</td></tr>
-</table>
-
-<h2>8. Declaration</h2>
-<p>I hereby confirm that the above shipment has been handed over by the customer and received by the logistics company in the stated condition and quantity for shipment to the final destination.</p>
-
-<h2>9. Signatures</h2>
-<table>
-<tr><td>Handed Over By (Customer)</td><td>Received By (Company)</td></tr>
-<tr><td><input name="cust_name"></td><td><input name="comp_name"></td></tr>
-<tr><td>Signature <input name="cust_sign"></td><td>Signature <input name="comp_sign"></td></tr>
-<tr><td>Date <input type="date" name="cust_date"></td><td>Date <input type="date" name="comp_date"></td></tr>
-<tr><td>Company Stamp</td><td><input name="comp_stamp"></td></tr>
-</table>
-
-<button class="submit-btn" type="submit">Submit Form</button>
-</form>
+<div class="header">
+<h2>Cargo Acceptance & Receiving Form</h2>
+<img src="https://raw.githubusercontent.com/bfouad81/logo/main/logo-artguru.png" class="logo">
 </div>
+
+<div class="section">
+<h2>Company Info</h2>
+<div class="form-group"><label>Company</label><input></div>
+<div class="form-group"><label>Address</label><input></div>
+</div>
+
+<div class="section">
+<h2>Customer</h2>
+<div class="form-group"><label>Name</label><input></div>
+<div class="form-group"><label>Email</label><input></div>
+</div>
+
+<div class="section">
+<h2>Cargo</h2>
+<table>
+<tr><th>#</th><th>Description</th><th>Pkgs</th><th>Weight</th></tr>
+<tr><td>1</td><td><input></td><td><input></td><td><input></td></tr>
+<tr><td>2</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+</div>
+
+<div class="section signature">
+<h2>Customer Signature</h2>
+<canvas id="sig"></canvas>
+</div>
+
+<button class="save" onclick="makePDF()">📄 حفظ PDF</button>
+<button class="submit">✔ إرسال</button>
+
+</div>
+
+<!-- PDF LIBS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+const canvas=document.getElementById("sig");
+const ctx=canvas.getContext("2d");
+let draw=false;
+
+canvas.addEventListener("mousedown",e=>{
+draw=true;
+ctx.beginPath();
+ctx.moveTo(e.offsetX,e.offsetY);
+});
+canvas.addEventListener("mousemove",e=>{
+if(draw){ctx.lineTo(e.offsetX,e.offsetY);ctx.stroke();}
+});
+canvas.addEventListener("mouseup",()=>draw=false);
+
+function makePDF(){
+html2canvas(document.getElementById("printArea"),{scale:2}).then(c=>{
+const img=c.toDataURL("image/png");
+const {jsPDF}=window.jspdf;
+const pdf=new jsPDF("p","mm","a4");
+pdf.addImage(img,"PNG",0,0,210,(c.height*210)/c.width);
+pdf.save("Cargo_Form.pdf");
+});
+}
+</script>
+
 </body>
 </html>
