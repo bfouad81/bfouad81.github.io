@@ -600,13 +600,62 @@ async function generatePDF() {
   const container = document.querySelector('.container');
   const buttons = document.querySelectorAll('button');
   
+  // إخفاء الأزرار
   buttons.forEach(b => b.style.display = 'none');
 
+  // حفظ القيم الأصلية وتحويل inputs لـ text
+  const inputs = container.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], textarea');
+  const originalValues = [];
+  
+  inputs.forEach(input => {
+    const value = input.value;
+    originalValues.push({ element: input, value: value, tagName: input.tagName });
+    
+    if (value) {
+      const span = document.createElement('span');
+      span.textContent = value;
+      span.style.cssText = `
+        display: inline-block;
+        padding: 10px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+        background: #fff;
+        min-height: ${input.tagName === 'TEXTAREA' ? '50px' : '40px'};
+      `;
+      input.style.display = 'none';
+      input.parentNode.insertBefore(span, input);
+      input.tempSpan = span;
+    }
+  });
+  
+  // معالجة الـ checkboxes
+  const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(cb => {
+    const label = cb.closest('label');
+    if (label) {
+      if (cb.checked) {
+        label.style.background = '#4caf50';
+        label.style.color = '#fff';
+        label.style.fontWeight = 'bold';
+      } else {
+        label.style.opacity = '0.5';
+      }
+    }
+  });
+
   try {
+    // انتظار التحديث
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
     const canvas = await html2canvas(container, {
       scale: 2,
       useCORS: true,
-      logging: false
+      logging: false,
+      allowTaint: true,
+      backgroundColor: '#ffffff'
     });
 
     const imgData = canvas.toDataURL('image/png');
@@ -615,14 +664,45 @@ async function generatePDF() {
 
     const pdfWidth = 210;
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    
+    let heightLeft = pdfHeight;
+    let position = 0;
+    
+    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+    heightLeft -= 297;
+    
+    while (heightLeft > 0) {
+      position = heightLeft - pdfHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+      heightLeft -= 297;
+    }
 
     const ref = document.getElementById('shipment_ref').value || 'Cargo';
     pdf.save(`Cargo_${ref}.pdf`);
+    
   } catch (error) {
     alert('حدث خطأ في حفظ PDF: ' + error.message);
   } finally {
+    // إرجاع كل شيء لطبيعته
+    inputs.forEach(input => {
+      if (input.tempSpan) {
+        input.tempSpan.remove();
+        delete input.tempSpan;
+      }
+      input.style.display = '';
+    });
+    
+    checkboxes.forEach(cb => {
+      const label = cb.closest('label');
+      if (label) {
+        label.style.background = '';
+        label.style.color = '';
+        label.style.fontWeight = '';
+        label.style.opacity = '';
+      }
+    });
+    
     buttons.forEach(b => b.style.display = 'block');
   }
 }
