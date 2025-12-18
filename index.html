@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نموذج قبول واستلام البضائع</title>
+<title>Bassem Fouad</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -46,6 +47,49 @@ body {
   max-width: 100%;
 }
 
+/* Progress Bar */
+.progress-container {
+  margin-bottom: 30px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 30px;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  width: 0%;
+  transition: width 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Auto-save indicator */
+.autosave {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.autosave.show {
+  opacity: 1;
+}
+
 .section {
   margin-bottom: 25px;
   padding: 20px;
@@ -82,7 +126,8 @@ body {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   padding: 10px;
   border: 2px solid #e0e0e0;
   border-radius: 6px;
@@ -91,10 +136,26 @@ body {
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: #d32f2f;
   box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+.form-group input.valid {
+  border-color: #4caf50;
+}
+
+.form-group input.invalid {
+  border-color: #f44336;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: 3px;
+  display: none;
 }
 
 .required::after {
@@ -103,6 +164,141 @@ body {
   font-weight: bold;
 }
 
+/* Cargo Items Section */
+.cargo-items {
+  margin-top: 20px;
+}
+
+.cargo-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #e0e0e0;
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cargo-item h4 {
+  color: #d32f2f;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-remove-item {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-remove-item:hover {
+  background: #d32f2f;
+}
+
+.btn-add-item {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-add-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+}
+
+/* File Upload Section */
+.file-upload-container {
+  margin-top: 15px;
+}
+
+.file-upload-item {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 2px dashed #d32f2f;
+}
+
+.file-upload-item label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #d32f2f;
+}
+
+.file-upload-item input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.file-preview-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #e0e0e0;
+}
+
+.file-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.file-preview-item .remove-file {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Checkbox group */
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
@@ -128,35 +324,7 @@ body {
   height: 16px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  font-size: 13px;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: right;
-}
-
-th {
-  background: #455a64;
-  color: #fff;
-  font-weight: 600;
-}
-
-td input, td textarea {
-  width: 100%;
-  padding: 6px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
+/* Signature */
 .signature-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -201,6 +369,33 @@ td input, td textarea {
 
 .btn-clear:hover {
   background: #e64a19;
+}
+
+/* QR Code */
+.qr-container {
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  display: none;
+}
+
+.qr-container.show {
+  display: block;
+}
+
+.qr-container h3 {
+  color: #d32f2f;
+  margin-bottom: 15px;
+}
+
+#qrcode {
+  display: inline-block;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .submit-btn {
@@ -250,74 +445,35 @@ td input, td textarea {
 @media print {
   body { background: #fff; padding: 0; }
   .container { box-shadow: none; padding: 20px; }
-  .submit-btn, .btn-clear { display: none !important; }
+  .submit-btn, .btn-clear, .btn-add-item, .btn-remove-item { display: none !important; }
+  .progress-container, .autosave { display: none !important; }
 }
 
 @media (max-width: 768px) {
   body { padding: 10px; }
-  
-  .container {
-    padding: 20px;
-    border-radius: 12px;
-  }
-  
-  .header {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .header h1 {
-    font-size: 20px;
-  }
-  
-  .logo {
-    width: 250px;
-    margin: 15px auto 0;
-  }
-  
-  .form-grid {
-    grid-template-columns: 1fr !important;
-  }
-  
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    font-size: 11px;
-  }
-  
-  th, td {
-    padding: 6px;
-    font-size: 11px;
-  }
-  
-  .signature-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .signature-pad {
-    width: 100%;
-    max-width: 350px;
-    height: 120px;
-  }
-  
-  .submit-btn {
-    width: 100%;
-    font-size: 16px;
-    padding: 14px 30px;
-  }
-  
-  .section h2 {
-    font-size: 16px;
-  }
+  .container { padding: 20px; border-radius: 12px; }
+  .header { flex-direction: column; text-align: center; }
+  .header h1 { font-size: 20px; }
+  .logo { width: 250px; margin: 15px auto 0; }
+  .form-grid { grid-template-columns: 1fr !important; }
+  .signature-container { grid-template-columns: 1fr; }
+  .signature-pad { width: 100%; max-width: 350px; height: 120px; }
+  .submit-btn { width: 100%; font-size: 16px; padding: 14px 30px; }
+  .section h2 { font-size: 16px; }
 }
 </style>
 </head>
 <body>
+<div class="autosave" id="autosaveIndicator">💾 تم الحفظ تلقائياً</div>
+
 <div class="container">
   <div class="header">
-    <h1>Cargo Acceptance & Receiving Form<br><small>نموذج قبول واستلام البضائع</small></h1>
+    <h1>Cargo Acceptance & Receiving Form<br><small>نموذج قبول واستلام البضائع - محسّن</small></h1>
     <img src="https://raw.githubusercontent.com/bfouad81/logo/main/logo-artguru.png" alt="Logo" class="logo">
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar">0%</div>
   </div>
 
   <form id="cargoForm">
@@ -328,19 +484,23 @@ td input, td textarea {
       <div class="form-grid">
         <div class="form-group">
           <label class="required">اسم الشركة - Company Name</label>
-          <input type="text" name="receiver_company" required>
+          <input type="text" name="receiver_company" required data-validate>
+          <span class="error-message">هذا الحقل مطلوب</span>
         </div>
         <div class="form-group">
           <label class="required">العنوان - Address</label>
-          <input type="text" name="receiver_address" required>
+          <input type="text" name="receiver_address" required data-validate>
+          <span class="error-message">هذا الحقل مطلوب</span>
         </div>
         <div class="form-group">
           <label class="required">الشخص المسؤول - Contact Person</label>
-          <input type="text" name="receiver_contact" required>
+          <input type="text" name="receiver_contact" required data-validate>
+          <span class="error-message">هذا الحقل مطلوب</span>
         </div>
         <div class="form-group">
           <label class="required">الهاتف - Phone</label>
-          <input type="text" name="receiver_phone" required>
+          <input type="tel" name="receiver_phone" required data-validate pattern="[0-9+\-\s]+">
+          <span class="error-message">أدخل رقم هاتف صحيح</span>
         </div>
       </div>
     </div>
@@ -350,11 +510,13 @@ td input, td textarea {
       <div class="form-grid">
         <div class="form-group">
           <label class="required">اسم العميل - Customer Name</label>
-          <input type="text" name="shipper_name" required>
+          <input type="text" name="shipper_name" required data-validate>
+          <span class="error-message">هذا الحقل مطلوب</span>
         </div>
         <div class="form-group">
           <label class="required">البريد الإلكتروني - Email</label>
-          <input type="email" name="customer_email" required>
+          <input type="email" name="customer_email" id="customer_email" required data-validate>
+          <span class="error-message">أدخل بريد إلكتروني صحيح</span>
         </div>
         <div class="form-group">
           <label>اسم الشركة - Company</label>
@@ -362,7 +524,7 @@ td input, td textarea {
         </div>
         <div class="form-group">
           <label>الهاتف - Phone</label>
-          <input type="text" name="shipper_phone">
+          <input type="tel" name="shipper_phone" pattern="[0-9+\-\s]+">
         </div>
       </div>
     </div>
@@ -372,11 +534,41 @@ td input, td textarea {
       <div class="form-grid">
         <div class="form-group">
           <label class="required">المنشأ - Origin</label>
-          <input type="text" name="origin" required>
+          <input type="text" name="origin" list="origins" required data-validate>
+          <datalist id="origins">
+            <option value="الكويت - Kuwait">
+            <option value="دبي - Dubai">
+            <option value="أبوظبي - Abu Dhabi">
+            <option value="الرياض - Riyadh">
+            <option value="جدة - Jeddah">
+            <option value="الدوحة - Doha">
+            <option value="المنامة - Manama">
+            <option value="مسقط - Muscat">
+            <option value="القاهرة - Cairo">
+            <option value="الإسكندرية - Alexandria">
+            <option value="بيروت - Beirut">
+            <option value="عمان - Amman">
+          </datalist>
+          <span class="error-message">هذا الحقل مطلوب</span>
         </div>
         <div class="form-group">
           <label class="required">الوجهة - Destination</label>
-          <input type="text" name="destination" required>
+          <input type="text" name="destination" list="destinations" required data-validate>
+          <datalist id="destinations">
+            <option value="الكويت - Kuwait">
+            <option value="دبي - Dubai">
+            <option value="أبوظبي - Abu Dhabi">
+            <option value="الرياض - Riyadh">
+            <option value="جدة - Jeddah">
+            <option value="الدوحة - Doha">
+            <option value="المنامة - Manama">
+            <option value="مسقط - Muscat">
+            <option value="القاهرة - Cairo">
+            <option value="الإسكندرية - Alexandria">
+            <option value="بيروت - Beirut">
+            <option value="عمان - Amman">
+          </datalist>
+          <span class="error-message">هذا الحقل مطلوب</span>
         </div>
         <div class="form-group">
           <label>رقم الرحلة - Voyage</label>
@@ -391,79 +583,109 @@ td input, td textarea {
 
     <div class="section">
       <h2>4. تفاصيل البضاعة - Cargo Details</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ملاحظات</th>
-            <th>CBM</th>
-            <th>الوزن</th>
-            <th>نوع التغليف</th>
-            <th>عدد الطرود</th>
-            <th>وصف البضاعة</th>
-            <th>#</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" name="rem1"></td>
-            <td><input type="text" name="cbm1"></td>
-            <td><input type="text" name="wt1"></td>
-            <td><input type="text" name="pack1"></td>
-            <td><input type="text" name="pkg1"></td>
-            <td><textarea name="desc1" rows="2"></textarea></td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td><input type="text" name="rem2"></td>
-            <td><input type="text" name="cbm2"></td>
-            <td><input type="text" name="wt2"></td>
-            <td><input type="text" name="pack2"></td>
-            <td><input type="text" name="pkg2"></td>
-            <td><textarea name="desc2" rows="2"></textarea></td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td><input type="text" name="rem3"></td>
-            <td><input type="text" name="cbm3"></td>
-            <td><input type="text" name="wt3"></td>
-            <td><input type="text" name="pack3"></td>
-            <td><input type="text" name="pkg3"></td>
-            <td><textarea name="desc3" rows="2"></textarea></td>
-            <td>3</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="cargo-items" id="cargoItems">
+        <div class="cargo-item" data-item="1">
+          <h4>
+            <span>صنف رقم 1 - Item #1</span>
+            <button type="button" class="btn-remove-item" onclick="removeCargoItem(1)" style="display:none;">حذف - Remove</button>
+          </h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="required">وصف البضاعة - Description</label>
+              <textarea name="cargo_desc_1" rows="2" required></textarea>
+            </div>
+            <div class="form-group">
+              <label class="required">عدد الطرود - Packages</label>
+              <input type="number" name="cargo_pkg_1" min="0" required>
+            </div>
+            <div class="form-group">
+              <label class="required">نوع التغليف - Packaging</label>
+              <select name="cargo_pack_1" required>
+                <option value="">اختر - Select</option>
+                <option value="Box">صندوق - Box</option>
+                <option value="Pallet">طبلية - Pallet</option>
+                <option value="Crate">صندوق خشبي - Crate</option>
+                <option value="Carton">كرتونة - Carton</option>
+                <option value="Bundle">حزمة - Bundle</option>
+                <option value="Drum">برميل - Drum</option>
+                <option value="Bag">شكارة - Bag</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>الوزن - Weight (kg)</label>
+              <input type="text" name="cargo_wt_1">
+            </div>
+            <div class="form-group">
+              <label>الحجم - CBM</label>
+              <input type="text" name="cargo_cbm_1">
+            </div>
+            <div class="form-group">
+              <label>ملاحظات - Remarks</label>
+              <input type="text" name="cargo_rem_1">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn-add-item" onclick="addCargoItem()">
+        ➕ إضافة صنف جديد - Add New Item
+      </button>
     </div>
 
     <div class="section">
-      <h2>5. المستندات - Documents</h2>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="docs" value="Invoice"> Invoice</label>
-        <label><input type="checkbox" name="docs" value="Packing List"> Packing List</label>
-        <label><input type="checkbox" name="docs" value="CMR"> CMR</label>
-        <label><input type="checkbox" name="docs" value="COO"> Certificate of Origin</label>
+      <h2>5. المستندات - Documents Upload</h2>
+      <div class="file-upload-container">
+        <div class="file-upload-item">
+          <label>📄 الفاتورة - Invoice</label>
+          <input type="file" id="invoice" accept="image/*,.pdf" onchange="previewFile(this, 'invoicePreview')">
+          <div class="file-preview" id="invoicePreview"></div>
+        </div>
+        
+        <div class="file-upload-item">
+          <label>📄 قائمة التعبئة - Packing List</label>
+          <input type="file" id="packingList" accept="image/*,.pdf" onchange="previewFile(this, 'packingPreview')">
+          <div class="file-preview" id="packingPreview"></div>
+        </div>
+        
+        <div class="file-upload-item">
+          <label>📄 شهادة المنشأ - Certificate of Origin</label>
+          <input type="file" id="coo" accept="image/*,.pdf" onchange="previewFile(this, 'cooPreview')">
+          <div class="file-preview" id="cooPreview"></div>
+        </div>
+        
+        <div class="file-upload-item">
+          <label>📸 صور البضاعة - Cargo Photos (متعددة - Multiple)</label>
+          <input type="file" id="cargoPhotos" accept="image/*" multiple onchange="previewFile(this, 'cargoPreview')">
+          <div class="file-preview" id="cargoPreview"></div>
+        </div>
       </div>
     </div>
 
     <div class="section">
       <h2>6. حالة البضاعة - Cargo Condition</h2>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="condition" value="Good"> جيدة - Good</label>
-        <label><input type="checkbox" name="condition" value="Damaged"> تالفة - Damaged</label>
-        <label><input type="checkbox" name="condition" value="Weak"> تغليف ضعيف - Weak</label>
+      <div class="form-group">
+        <label class="required">الحالة - Condition</label>
+        <select name="cargo_condition" required>
+          <option value="">اختر - Select</option>
+          <option value="Good">جيدة - Good Condition</option>
+          <option value="Minor Damage">تلف طفيف - Minor Damage</option>
+          <option value="Major Damage">تلف كبير - Major Damage</option>
+          <option value="Weak Packaging">تغليف ضعيف - Weak Packaging</option>
+        </select>
       </div>
       <div class="form-group" style="margin-top:10px;">
         <label>ملاحظات - Remarks</label>
-        <textarea name="condition_remarks" rows="2"></textarea>
+        <textarea name="condition_remarks" rows="3"></textarea>
       </div>
     </div>
 
     <div class="section">
       <h2>7. تعليمات خاصة - Special Handling</h2>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="handling" value="Fragile"> Fragile</label>
-        <label><input type="checkbox" name="handling" value="Upright"> Keep Upright</label>
-        <label><input type="checkbox" name="handling" value="Temp"> Temperature Controlled</label>
+        <label><input type="checkbox" name="handling" value="Fragile"> قابل للكسر - Fragile</label>
+        <label><input type="checkbox" name="handling" value="Upright"> وضع رأسي - Keep Upright</label>
+        <label><input type="checkbox" name="handling" value="Temperature"> حرارة متحكمة - Temperature Controlled</label>
+        <label><input type="checkbox" name="handling" value="Heavy"> ثقيل - Heavy</label>
+        <label><input type="checkbox" name="handling" value="Hazardous"> خطر - Hazardous</label>
       </div>
     </div>
 
@@ -500,6 +722,12 @@ td input, td textarea {
       </div>
     </div>
 
+    <div class="qr-container" id="qrContainer">
+      <h3>🔗 رمز التتبع - Tracking QR Code</h3>
+      <div id="qrcode"></div>
+      <p style="margin-top:10px; color:#666;">امسح الرمز لتتبع الشحنة - Scan to track shipment</p>
+    </div>
+
     <div class="message loading" id="loading">
       ⏳ جاري الإرسال... الرجاء الانتظار<br>Sending... Please wait
     </div>
@@ -513,11 +741,11 @@ td input, td textarea {
     </div>
 
     <button type="button" class="submit-btn pdf-btn" onclick="generatePDF()">
-      📄 حفظ النموذج كـ PDF - Save as PDF
+      📄 حفظ PDF على الجهاز - Save PDF to Device
     </button>
     
     <button type="submit" class="submit-btn" id="submitBtn">
-      إرسال النموذج - Submit Form
+      📤 إرسال البيانات - Send Data
     </button>
   </form>
 </div>
@@ -525,8 +753,213 @@ td input, td textarea {
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6-lFxLML4Yd8O248aDw8kFWGNQcRbSqYd1Lc_GMgt38_EgBg8kVCE-O5XlJQADipuEA/exec';
 
-document.getElementById('shipment_ref').value = 'SHP-' + Date.now();
+// Generate unique shipment reference
+const shipmentRef = 'EGO-' + new Date().getFullYear() + '-' + String(Date.now()).slice(-6);
+document.getElementById('shipment_ref').value = shipmentRef;
 
+// Cargo items counter
+let cargoItemCount = 1;
+
+// File storage
+const uploadedFiles = {};
+
+// Auto-save functionality
+let autoSaveTimer;
+function autoSave() {
+  const formData = new FormData(document.getElementById('cargoForm'));
+  const data = {};
+  for (let [key, value] of formData.entries()) {
+    data[key] = value;
+  }
+  localStorage.setItem('cargoFormData', JSON.stringify(data));
+  
+  const indicator = document.getElementById('autosaveIndicator');
+  indicator.classList.add('show');
+  setTimeout(() => indicator.classList.remove('show'), 2000);
+}
+
+// Load saved data
+function loadSavedData() {
+  const saved = localStorage.getItem('cargoFormData');
+  if (saved) {
+    const data = JSON.parse(saved);
+    for (let key in data) {
+      const input = document.querySelector(`[name="${key}"]`);
+      if (input) input.value = data[key];
+    }
+  }
+}
+
+// Input change listener for auto-save
+document.getElementById('cargoForm').addEventListener('input', () => {
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(autoSave, 3000);
+  updateProgress();
+});
+
+// Progress bar calculation
+function updateProgress() {
+  const form = document.getElementById('cargoForm');
+  const requiredInputs = form.querySelectorAll('[required]');
+  let filled = 0;
+  
+  requiredInputs.forEach(input => {
+    if (input.type === 'checkbox' || input.type === 'radio') {
+      if (input.checked) filled++;
+    } else if (input.value.trim() !== '') {
+      filled++;
+    }
+  });
+  
+  const progress = Math.round((filled / requiredInputs.length) * 100);
+  const bar = document.getElementById('progressBar');
+  bar.style.width = progress + '%';
+  bar.textContent = progress + '%';
+}
+
+// Validation
+document.querySelectorAll('[data-validate]').forEach(input => {
+  input.addEventListener('blur', function() {
+    validateField(this);
+  });
+});
+
+function validateField(field) {
+  const errorMsg = field.nextElementSibling;
+  if (field.validity.valid) {
+    field.classList.remove('invalid');
+    field.classList.add('valid');
+    if (errorMsg) errorMsg.style.display = 'none';
+  } else {
+    field.classList.remove('valid');
+    field.classList.add('invalid');
+    if (errorMsg) errorMsg.style.display = 'block';
+  }
+}
+
+// Add cargo item
+function addCargoItem() {
+  cargoItemCount++;
+  const container = document.getElementById('cargoItems');
+  const newItem = document.createElement('div');
+  newItem.className = 'cargo-item';
+  newItem.setAttribute('data-item', cargoItemCount);
+  newItem.innerHTML = `
+    <h4>
+      <span>صنف رقم ${cargoItemCount} - Item #${cargoItemCount}</span>
+      <button type="button" class="btn-remove-item" onclick="removeCargoItem(${cargoItemCount})">حذف - Remove</button>
+    </h4>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="required">وصف البضاعة - Description</label>
+        <textarea name="cargo_desc_${cargoItemCount}" rows="2" required></textarea>
+      </div>
+      <div class="form-group">
+        <label class="required">عدد الطرود - Packages</label>
+        <input type="number" name="cargo_pkg_${cargoItemCount}" min="0" required>
+      </div>
+      <div class="form-group">
+        <label class="required">نوع التغليف - Packaging</label>
+        <select name="cargo_pack_${cargoItemCount}" required>
+          <option value="">اختر - Select</option>
+          <option value="Box">صندوق - Box</option>
+          <option value="Pallet">طبلية - Pallet</option>
+          <option value="Crate">صندوق خشبي - Crate</option>
+          <option value="Carton">كرتونة - Carton</option>
+          <option value="Bundle">حزمة - Bundle</option>
+          <option value="Drum">برميل - Drum</option>
+          <option value="Bag">شكارة - Bag</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>الوزن - Weight (kg)</label>
+        <input type="text" name="cargo_wt_${cargoItemCount}">
+      </div>
+      <div class="form-group">
+        <label>الحجم - CBM</label>
+        <input type="text" name="cargo_cbm_${cargoItemCount}">
+      </div>
+      <div class="form-group">
+        <label>ملاحظات - Remarks</label>
+        <input type="text" name="cargo_rem_${cargoItemCount}">
+      </div>
+    </div>
+  `;
+  container.appendChild(newItem);
+  updateProgress();
+  
+  if (document.querySelectorAll('.cargo-item').length > 1) {
+    document.querySelectorAll('.btn-remove-item').forEach(btn => {
+      btn.style.display = 'inline-block';
+    });
+  }
+}
+
+// Remove cargo item
+function removeCargoItem(itemNum) {
+  const item = document.querySelector(`.cargo-item[data-item="${itemNum}"]`);
+  if (item) {
+    item.remove();
+    updateProgress();
+  }
+  
+  if (document.querySelectorAll('.cargo-item').length <= 1) {
+    document.querySelectorAll('.btn-remove-item').forEach(btn => {
+      btn.style.display = 'none';
+    });
+  }
+}
+
+// File preview
+function previewFile(input, previewId) {
+  const preview = document.getElementById(previewId);
+  preview.innerHTML = '';
+  
+  const files = input.files;
+  uploadedFiles[input.id] = [];
+  
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      uploadedFiles[input.id].push({
+        name: file.name,
+        type: file.type,
+        data: e.target.result
+      });
+      
+      const div = document.createElement('div');
+      div.className = 'file-preview-item';
+      
+      if (file.type.startsWith('image/')) {
+        div.innerHTML = `
+          <img src="${e.target.result}" alt="${file.name}">
+          <button type="button" class="remove-file" onclick="removeFile('${input.id}', ${i}, '${previewId}')">×</button>
+        `;
+      } else {
+        div.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f5f5f5;font-size:11px;text-align:center;padding:5px;">
+            📄<br>${file.name.substring(0, 15)}...
+          </div>
+          <button type="button" class="remove-file" onclick="removeFile('${input.id}', ${i}, '${previewId}')">×</button>
+        `;
+      }
+      
+      preview.appendChild(div);
+    };
+    
+    reader.readAsDataURL(file);
+  }
+}
+
+function removeFile(inputId, index, previewId) {
+  uploadedFiles[inputId].splice(index, 1);
+  document.getElementById(inputId).value = '';
+  document.getElementById(previewId).innerHTML = '';
+}
+
+// Signatures
 let custCanvas = document.getElementById('custSignature');
 let compCanvas = document.getElementById('compSignature');
 let custCtx = custCanvas.getContext('2d');
@@ -535,48 +968,38 @@ let compCtx = compCanvas.getContext('2d');
 function setupCanvas(canvas, ctx) {
   let drawing = false;
   
-  canvas.addEventListener('mousedown', (e) => {
+  function startDrawing(e) {
     drawing = true;
     ctx.beginPath();
     const rect = canvas.getBoundingClientRect();
-    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-  });
+    const x = e.clientX || e.touches[0].clientX;
+    const y = e.clientY || e.touches[0].clientY;
+    ctx.moveTo(x - rect.left, y - rect.top);
+  }
   
-  canvas.addEventListener('mousemove', (e) => {
-    if (drawing) {
-      const rect = canvas.getBoundingClientRect();
-      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-      ctx.strokeStyle = '#000';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-    }
-  });
-  
-  canvas.addEventListener('mouseup', () => drawing = false);
-  canvas.addEventListener('mouseout', () => drawing = false);
-  
-  canvas.addEventListener('touchstart', (e) => {
+  function draw(e) {
+    if (!drawing) return;
     e.preventDefault();
-    drawing = true;
-    const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    ctx.beginPath();
-    ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
-  });
+    const x = e.clientX || e.touches[0].clientX;
+    const y = e.clientY || e.touches[0].clientY;
+    ctx.lineTo(x - rect.left, y - rect.top);
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
   
-  canvas.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-    if (drawing) {
-      const touch = e.touches[0];
-      const rect = canvas.getBoundingClientRect();
-      ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
-      ctx.strokeStyle = '#000';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-    }
-  });
+  function stopDrawing() {
+    drawing = false;
+  }
   
-  canvas.addEventListener('touchend', () => drawing = false);
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseout', stopDrawing);
+  canvas.addEventListener('touchstart', startDrawing);
+  canvas.addEventListener('touchmove', draw);
+  canvas.addEventListener('touchend', stopDrawing);
 }
 
 setupCanvas(custCanvas, custCtx);
@@ -596,21 +1019,53 @@ function isCanvasSigned(canvas) {
   return pixelBuffer.some(color => color !== 0);
 }
 
+// Generate QR Code
+function generateQRCode() {
+  const qrContainer = document.getElementById('qrcode');
+  qrContainer.innerHTML = '';
+  
+  const trackingUrl = `https://yourcompany.com/track?ref=${shipmentRef}`;
+  
+  new QRCode(qrContainer, {
+    text: trackingUrl,
+    width: 200,
+    height: 200,
+    colorDark: "#d32f2f",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  
+  document.getElementById('qrContainer').classList.add('show');
+}
+
+// Generate PDF - Optimized version
 async function generatePDF() {
+  if (!isCanvasSigned(custCanvas) || !isCanvasSigned(compCanvas)) {
+    alert('الرجاء التوقيع في كلا الخانتين\nPlease sign both signature boxes');
+    return;
+  }
+  
+  const pdfBtn = event.target;
+  pdfBtn.disabled = true;
+  pdfBtn.textContent = '⏳ جاري إنشاء PDF... Creating PDF...';
+  
+  generateQRCode();
+  
   const container = document.querySelector('.container');
   const buttons = document.querySelectorAll('button');
+  const progressBar = document.querySelector('.progress-container');
+  const autosave = document.querySelector('.autosave');
   
-  // إخفاء الأزرار
+  // Hide unnecessary elements
   buttons.forEach(b => b.style.display = 'none');
+  if (progressBar) progressBar.style.display = 'none';
+  if (autosave) autosave.style.display = 'none';
 
-  // حفظ القيم الأصلية وتحويل inputs لـ text
-  const inputs = container.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], textarea');
-  const originalValues = [];
+  const inputs = container.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"], textarea, select');
+  const originalElements = [];
   
   inputs.forEach(input => {
     const value = input.value;
-    originalValues.push({ element: input, value: value, tagName: input.tagName });
-    
     if (value) {
       const span = document.createElement('span');
       span.textContent = value;
@@ -627,11 +1082,10 @@ async function generatePDF() {
       `;
       input.style.display = 'none';
       input.parentNode.insertBefore(span, input);
-      input.tempSpan = span;
+      originalElements.push({ input, span });
     }
   });
   
-  // معالجة الـ checkboxes
   const checkboxes = container.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach(cb => {
     const label = cb.closest('label');
@@ -641,55 +1095,51 @@ async function generatePDF() {
         label.style.color = '#fff';
         label.style.fontWeight = 'bold';
       } else {
-        label.style.opacity = '0.5';
+        label.style.opacity = '0.3';
       }
     }
   });
 
   try {
-    // انتظار التحديث
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 300));
     
+    // Optimize canvas generation
     const canvas = await html2canvas(container, {
-      scale: 2,
+      scale: 1.5,
       useCORS: true,
       logging: false,
       allowTaint: true,
-      backgroundColor: '#ffffff'
+      backgroundColor: '#ffffff',
+      imageTimeout: 0,
+      removeContainer: false
     });
 
-    const imgData = canvas.toDataURL('image/png');
+    const imgData = canvas.toDataURL('image/jpeg', 0.85);
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF('p', 'mm', 'a4');
 
     const pdfWidth = 210;
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
     
-    let heightLeft = pdfHeight;
-    let position = 0;
-    
-    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-    heightLeft -= 297;
-    
-    while (heightLeft > 0) {
-      position = heightLeft - pdfHeight;
+    // Limit to 2 pages maximum
+    if (pdfHeight <= 297) {
+      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+    } else {
+      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, 297);
       pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-      heightLeft -= 297;
+      pdf.addImage(imgData, 'JPEG', 0, -297, pdfWidth, pdfHeight);
     }
 
-    const ref = document.getElementById('shipment_ref').value || 'Cargo';
-    pdf.save(`Cargo_${ref}.pdf`);
+    pdf.save(`Cargo_Receipt_${shipmentRef}.pdf`);
+    
+    alert('✅ تم حفظ PDF بنجاح!\nPDF saved successfully!');
     
   } catch (error) {
-    alert('حدث خطأ في حفظ PDF: ' + error.message);
+    alert('❌ حدث خطأ في حفظ PDF: ' + error.message);
+    console.error('PDF Error:', error);
   } finally {
-    // إرجاع كل شيء لطبيعته
-    inputs.forEach(input => {
-      if (input.tempSpan) {
-        input.tempSpan.remove();
-        delete input.tempSpan;
-      }
+    originalElements.forEach(({ input, span }) => {
+      span.remove();
       input.style.display = '';
     });
     
@@ -704,9 +1154,15 @@ async function generatePDF() {
     });
     
     buttons.forEach(b => b.style.display = 'block');
+    if (progressBar) progressBar.style.display = 'block';
+    if (autosave) autosave.style.display = 'block';
+    
+    pdfBtn.disabled = false;
+    pdfBtn.textContent = '📄 حفظ PDF على الجهاز - Save PDF to Device';
   }
 }
 
+// Form submission - Data only
 document.getElementById('cargoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
@@ -729,10 +1185,11 @@ document.getElementById('cargoForm').addEventListener('submit', async (e) => {
   errorMsg.classList.remove('active');
   loading.classList.add('active');
   submitBtn.disabled = true;
+  submitBtn.textContent = '⏳ جاري الإرسال... Sending...';
   
   try {
     const formData = new FormData(e.target);
-    const data = {};
+    const data = { action: 'submitForm' };
     
     for (let [key, value] of formData.entries()) {
       if (data[key]) {
@@ -742,30 +1199,71 @@ document.getElementById('cargoForm').addEventListener('submit', async (e) => {
       }
     }
     
-    data.cust_signature = custCanvas.toDataURL();
-    data.comp_signature = compCanvas.toDataURL();
+    // Add cargo items as JSON
+    const cargoItems = [];
+    for (let i = 1; i <= cargoItemCount; i++) {
+      const item = document.querySelector(`.cargo-item[data-item="${i}"]`);
+      if (item) {
+        cargoItems.push({
+          desc: data[`cargo_desc_${i}`] || '',
+          pkg: data[`cargo_pkg_${i}`] || '',
+          pack: data[`cargo_pack_${i}`] || '',
+          wt: data[`cargo_wt_${i}`] || '',
+          cbm: data[`cargo_cbm_${i}`] || '',
+          rem: data[`cargo_rem_${i}`] || ''
+        });
+      }
+    }
+    data.cargo_items = JSON.stringify(cargoItems);
     
-    const response = await fetch(SCRIPT_URL, {
+    // Add signatures as compressed data
+    data.cust_signature = custCanvas.toDataURL('image/jpeg', 0.7);
+    data.comp_signature = compCanvas.toDataURL('image/jpeg', 0.7);
+    
+    // Add file names only
+    const fileInfo = {};
+    for (let key in uploadedFiles) {
+      fileInfo[key] = uploadedFiles[key].map(f => f.name);
+    }
+    data.uploaded_files = JSON.stringify(fileInfo);
+    
+    await fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
-      }
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }
     });
     
     loading.classList.remove('active');
     successMsg.classList.add('active');
     
-    setTimeout(() => location.reload(), 3000);
+    localStorage.removeItem('cargoFormData');
+    
+    setTimeout(() => {
+      if (confirm('تم الإرسال بنجاح! هل تريد إنشاء نموذج جديد؟\nSuccess! Create new form?')) {
+        location.reload();
+      }
+    }, 2000);
     
   } catch (error) {
     console.error('خطأ في الإرسال:', error);
     loading.classList.remove('active');
     errorMsg.classList.add('active');
-    document.getElementById('errorText').textContent = error.message || 'Failed to fetch';
+    document.getElementById('errorText').textContent = error.message || 'Failed to send data';
     submitBtn.disabled = false;
+    submitBtn.textContent = '📤 إرسال البيانات - Send Data';
   }
+});
+
+// Initialize
+window.addEventListener('load', () => {
+  loadSavedData();
+  updateProgress();
+  
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(input => {
+    if (!input.value) input.value = today;
+  });
 });
 </script>
 </body>
