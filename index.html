@@ -61,6 +61,7 @@ body{margin:0;padding:0;background:#f2f2f2;font-family:Arial,sans-serif;color:#0
   font-size:16px;
   box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
+.note{font-size:13px;color:#666;margin:10px 0;}
 
 /* Grid */
 .row{display:grid;grid-template-columns:repeat(12,1fr);gap:15px;}
@@ -73,11 +74,15 @@ label{font-size:13px;font-weight:bold;}
 input,select,textarea{width:100%;padding:9px;margin-top:6px;border:1px solid var(--border-soft);border-radius:6px;transition:.2s}
 textarea{resize:vertical}
 input.filled,select.filled,textarea.filled{background:var(--red-soft);border-color:var(--red-main);}
+.error-msg{color:#c62828;font-size:12px;margin-top:4px;display:none;}
 
 /* Signature */
-.signature-box{border:1px dashed var(--border-soft);border-radius:6px;height:160px;}
-.clear-btn{margin-top:6px;padding:5px 10px;border:none;background:#eee;cursor:pointer;}
-.submit-btn{width:100%;padding:18px;border:none;background:var(--red-main);color:#fff;font-size:16px;cursor:pointer;}
+.signature-box{border:1px dashed var(--border-soft);border-radius:6px;height:160px;background:#fafafa;}
+.clear-btn{margin-top:6px;padding:5px 10px;border:none;background:#eee;cursor:pointer;border-radius:4px;}
+.clear-btn:hover{background:#ddd;}
+.submit-btn{width:100%;padding:18px;border:none;background:var(--red-main);color:#fff;font-size:16px;cursor:pointer;border-radius:8px;transition:.3s;}
+.submit-btn:hover:not(:disabled){background:#a01f1f;}
+.submit-btn:disabled{opacity:0.6;cursor:not-allowed;}
 
 /* Hide in PDF */
 .hide-in-pdf{display:block;}
@@ -109,9 +114,21 @@ input.filled,select.filled,textarea.filled{background:var(--red-soft);border-col
 <div class="section">
 <div class="section-title">Customer / Shipper</div>
 <div class="row">
-  <div class="col-4"><label>Name *</label><input id="customerName" required></div>
-  <div class="col-4"><label>Phone *</label><input id="customerPhone" required></div>
-  <div class="col-4"><label>Address *</label><input id="customerAddress" required></div>
+  <div class="col-4">
+    <label>Name *</label>
+    <input id="customerName" required>
+    <span class="error-msg" id="error-customerName">This field is required</span>
+  </div>
+  <div class="col-4">
+    <label>Phone *</label>
+    <input id="customerPhone" required>
+    <span class="error-msg" id="error-customerPhone">This field is required</span>
+  </div>
+  <div class="col-4">
+    <label>Address *</label>
+    <input id="customerAddress" required>
+    <span class="error-msg" id="error-customerAddress">This field is required</span>
+  </div>
   <div class="col-4"><label>Email</label><input id="customerEmail" type="email"></div>
 </div>
 </div>
@@ -120,9 +137,21 @@ input.filled,select.filled,textarea.filled{background:var(--red-soft);border-col
 <div class="section">
 <div class="section-title">Consignee / Receiver</div>
 <div class="row">
-  <div class="col-4"><label>Name *</label><input id="consigneeName" required></div>
-  <div class="col-4"><label>Phone *</label><input id="consigneePhone" required></div>
-  <div class="col-4"><label>Address *</label><input id="consigneeAddress" required></div>
+  <div class="col-4">
+    <label>Name *</label>
+    <input id="consigneeName" required>
+    <span class="error-msg" id="error-consigneeName">This field is required</span>
+  </div>
+  <div class="col-4">
+    <label>Phone *</label>
+    <input id="consigneePhone" required>
+    <span class="error-msg" id="error-consigneePhone">This field is required</span>
+  </div>
+  <div class="col-4">
+    <label>Address *</label>
+    <input id="consigneeAddress" required>
+    <span class="error-msg" id="error-consigneeAddress">This field is required</span>
+  </div>
   <div class="col-4"><label>Email</label><input id="consigneeEmail" type="email"></div>
   <div class="col-4"><label>Company Name (if any)</label><input id="consigneeCompany"></div>
 </div>
@@ -132,15 +161,19 @@ input.filled,select.filled,textarea.filled{background:var(--red-soft);border-col
 <div class="section">
 <div class="section-title">Shipment Details</div>
 <div class="row">
-  <div class="col-6"><label>Mode of Transport *</label>
+  <div class="col-6">
+    <label>Mode of Transport *</label>
     <select id="transportMode" required>
       <option value="">Select</option><option>Land</option><option>Air</option><option>Sea</option>
     </select>
+    <span class="error-msg" id="error-transportMode">This field is required</span>
   </div>
-  <div class="col-6"><label>Shipment Type *</label>
+  <div class="col-6">
+    <label>Shipment Type *</label>
     <select id="shipmentType" required>
       <option value="">Select</option><option>LTL</option><option>FTL</option><option>Courier</option><option>Other</option>
     </select>
+    <span class="error-msg" id="error-shipmentType">This field is required</span>
   </div>
 </div>
 </div>
@@ -150,31 +183,74 @@ input.filled,select.filled,textarea.filled{background:var(--red-soft);border-col
 <div class="section-title">Cargo Description (As Declared by Shipper)</div>
 <p class="note">All information below is as declared by the shipper. Actual weight & CBM may differ.</p>
 <div class="row">
-  <div class="col-12 col-md-6"><label>Description *</label><input id="goodsDescription" required></div>
-  <div class="col-12 col-md-3"><label>Packaging *</label>
+  <div class="col-6">
+    <label>Description *</label>
+    <input id="goodsDescription" required>
+    <span class="error-msg" id="error-goodsDescription">This field is required</span>
+  </div>
+  <div class="col-3">
+    <label>Packaging *</label>
     <select id="packagingType" required>
       <option value="">Select</option>
       <option>Box</option><option>Pallet</option><option>Wooden Crate</option><option>Drum</option><option>Bag</option>
     </select>
+    <span class="error-msg" id="error-packagingType">This field is required</span>
   </div>
-  <div class="col-4 col-md-1"><label>Pkgs *</label><input id="packages" type="number" required></div>
-  <div class="col-4 col-md-1"><label>KG *</label><input id="declaredWeight" type="number" required></div>
-  <div class="col-4 col-md-1"><label>CBM *</label><input id="cbm" type="number" step="0.01" required></div>
+  <div class="col-1">
+    <label>Pkgs *</label>
+    <input id="packages" type="number" min="1" required>
+    <span class="error-msg" id="error-packages">Required</span>
+  </div>
+  <div class="col-1">
+    <label>KG *</label>
+    <input id="declaredWeight" type="number" min="0.1" step="0.1" required>
+    <span class="error-msg" id="error-declaredWeight">Required</span>
+  </div>
+  <div class="col-1">
+    <label>CBM *</label>
+    <input id="cbm" type="number" min="0.01" step="0.01" required>
+    <span class="error-msg" id="error-cbm">Required</span>
+  </div>
 </div>
 </div>
 
 <!-- DOCUMENTS -->
 <div class="section hide-in-pdf">
-<div class="section-title">Documents Upload (Optional)</div>
-<div class="row">
-  <div class="col-4"><label>Invoice</label><input type="file"></div>
-  <div class="col-4"><label>Packing List</label><input type="file"></div>
-  <div class="col-4"><label>CMR / Waybill</label><input type="file"></div>
-  <div class="col-4"><label>Certificate of Origin</label><input type="file"></div>
-  <div class="col-4"><label>MSDS</label><input type="file"></div>
-  <div class="col-4"><label>Other</label><input type="file"></div>
+  <div class="section-title">Documents Upload (Optional)</div>
+
+  <div class="row">
+    <div class="col-4">
+      <label>Invoice</label>
+      <input type="file" id="invoiceFile" accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+
+    <div class="col-4">
+      <label>Packing List</label>
+      <input type="file" id="packingListFile" accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+
+    <div class="col-4">
+      <label>CMR / Waybill</label>
+      <input type="file" id="cmrFile" accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+
+    <div class="col-4">
+      <label>Certificate of Origin</label>
+      <input type="file" id="originFile" accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+
+    <div class="col-4">
+      <label>MSDS</label>
+      <input type="file" id="msdsFile" accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+
+    <div class="col-4">
+      <label>Other Document</label>
+      <input type="file" id="otherFile" accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+  </div>
 </div>
-</div>
+
 
 <!-- SIGNATURE -->
 <div class="section">
@@ -211,16 +287,82 @@ to the final destination.
 const sigCustomer=new SignaturePad(document.getElementById("sigCustomer"));
 const sigCompany=new SignaturePad(document.getElementById("sigCompany"));
 
+// HELPER FUNCTIONS
+async function fileToBase64(file){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function getFileMimeType(filename) {
+  const ext = filename.split('.').pop().toLowerCase();
+  const mimeTypes = {
+    'pdf': 'application/pdf',
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg',
+    'png': 'image/png'
+  };
+  return mimeTypes[ext] || 'application/octet-stream';
+}
+
+function validateForm() {
+  let isValid = true;
+  const requiredFields = [
+    'customerName', 'customerPhone', 'customerAddress',
+    'consigneeName', 'consigneePhone', 'consigneeAddress',
+    'transportMode', 'shipmentType', 'goodsDescription',
+    'packagingType', 'packages', 'declaredWeight', 'cbm'
+  ];
+  
+  // Hide all errors first
+  document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+  
+  requiredFields.forEach(fieldId => {
+    const field = document.getElementById(fieldId);
+    const error = document.getElementById('error-' + fieldId);
+    
+    if (!field.value || field.value.trim() === '') {
+      isValid = false;
+      if (error) {
+        error.style.display = 'block';
+      }
+      field.style.borderColor = '#c62828';
+    } else {
+      field.style.borderColor = '';
+    }
+  });
+  
+  if (!isValid) {
+    alert('Please fill in all required fields marked with *');
+  }
+  
+  return isValid;
+}
+
 // HIGHLIGHT FILLED
 document.querySelectorAll("input,select,textarea").forEach(el=>{
   el.addEventListener("change",()=>{
     if(el.value || el.files?.length) el.classList.add("filled");
     else el.classList.remove("filled");
   });
+  
+  // Clear error on input
+  el.addEventListener("input", () => {
+    const error = document.getElementById('error-' + el.id);
+    if (error && el.value) {
+      error.style.display = 'none';
+      el.style.borderColor = '';
+    }
+  });
 });
 
 // SAVE PDF
 document.getElementById('savePdfBtn').addEventListener('click', function() {
+    if (!validateForm()) return;
+    
     // Hide elements before PDF generation
     document.querySelectorAll('.hide-in-pdf').forEach(el => {
       el.style.display = 'none';
@@ -246,6 +388,14 @@ document.getElementById('savePdfBtn').addEventListener('click', function() {
 
 // SEND EMAIL
 document.getElementById('sendEmailBtn').addEventListener('click', async function() {
+  if (!validateForm()) return;
+  
+  // Check signatures
+  if (sigCustomer.isEmpty() || sigCompany.isEmpty()) {
+    alert('Please provide both customer and company signatures');
+    return;
+  }
+  
   // Collect form data
   const formData = {
     customerName: document.getElementById('customerName').value,
@@ -263,8 +413,28 @@ document.getElementById('sendEmailBtn').addEventListener('click', async function
     packagingType: document.getElementById('packagingType').value,
     packages: document.getElementById('packages').value,
     declaredWeight: document.getElementById('declaredWeight').value,
-    cbm: document.getElementById('cbm').value
+    cbm: document.getElementById('cbm').value,
+    files: []
   };
+
+  // Process file uploads
+  const fileInputs = [
+    'invoiceFile', 'packingListFile', 'cmrFile',
+    'originFile', 'msdsFile', 'otherFile'
+  ];
+
+  for (let id of fileInputs) {
+    const input = document.getElementById(id);
+    if (input.files.length > 0) {
+      const file = input.files[0];
+      const base64 = await fileToBase64(file);
+      formData.files.push({
+        name: file.name,
+        data: base64,
+        mimeType: getFileMimeType(file.name)
+      });
+    }
+  }
 
   try {
     this.disabled = true;
@@ -295,71 +465,112 @@ document.getElementById('sendEmailBtn').addEventListener('click', async function
     
     this.textContent = 'Sending...';
     
-    const response = await fetch('https://script.google.com/macros/s/AKfycbx2aTfDF-rA4Y8CX1z61GmOT9e0LNs3hODEQOqClDcZRyRM8PJ4iEdoeXdw_veNdcnzhw/exec', {
+    // Split large data if needed
+    const formDataStr = JSON.stringify(formData);
+    const dataSize = new Blob([formDataStr]).size;
+    const pdfSize = new Blob([pdf]).size;
+    
+    console.log('Data sizes:', { formData: dataSize, pdf: pdfSize });
+    
+    const response = await fetch('https://script.google.com/macros/s/AKfycbyMUEOeWVd8QwtiF1dSycl1OetuaJwA6xQfSMsLQRJ9xEbEEwka32hcAPcjZCRR-VNc-A/exec', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
       body: new URLSearchParams({
-        data: JSON.stringify(formData),
-        pdfFile: pdf
+        data: formDataStr,
+        pdfData: pdf,
+        timestamp: new Date().getTime()
       })
     });
     
-    alert('Form submitted successfully! Email sent with PDF attachment.');
-    this.textContent = 'Send Email';
+    const result = await response.json();
     
-    // Clear all form fields
-    document.querySelectorAll("input, select, textarea").forEach(el => {
-      if(el.type === 'file') {
-        el.value = '';
-      } else if(el.type === 'checkbox' || el.type === 'radio') {
-        el.checked = false;
-      } else {
-        el.value = '';
-      }
-      el.classList.remove('filled');
-    });
-    
-    // Clear signatures
-    sigCustomer.clear();
-    sigCompany.clear();
-    
-    // Clear localStorage
-    localStorage.clear();
-    
-    // Scroll to top
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    if (result.status === 'success') {
+      alert('Form submitted successfully! Email sent with PDF attachment.');
+      
+      // Clear all form fields
+      document.querySelectorAll("input, select, textarea").forEach(el => {
+        if(el.type === 'file') {
+          el.value = '';
+        } else if(el.type === 'checkbox' || el.type === 'radio') {
+          el.checked = false;
+        } else {
+          el.value = '';
+        }
+        el.classList.remove('filled');
+      });
+      
+      // Clear signatures
+      sigCustomer.clear();
+      sigCompany.clear();
+      
+      // Scroll to top
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    } else {
+      throw new Error(result.message || 'Unknown error');
+    }
     
   } catch (error) {
+    console.error('Error:', error);
     alert('Error submitting form: ' + error.message);
-    this.textContent = 'Send Email';
   } finally {
     this.disabled = false;
+    this.textContent = 'Send Email';
   }
 });
 
 // AUTO SAVE EVERY 2 MINUTES
 setInterval(() => {
+  const saveData = {};
   document.querySelectorAll("input, select, textarea").forEach(el => {
-    if(el.type==='file') return;
-    localStorage.setItem(el.id, el.value);
+    if(el.type!=='file' && el.id) {
+      saveData[el.id] = el.value;
+    }
   });
-  localStorage.setItem('sigCustomer', sigCustomer.toDataURL());
-  localStorage.setItem('sigCompany', sigCompany.toDataURL());
+  
+  // Save signatures only if not empty
+  if (!sigCustomer.isEmpty()) {
+    saveData.sigCustomer = sigCustomer.toDataURL();
+  }
+  if (!sigCompany.isEmpty()) {
+    saveData.sigCompany = sigCompany.toDataURL();
+  }
+  
+  try {
+    localStorage.setItem('cargoFormData', JSON.stringify(saveData));
+  } catch (e) {
+    console.error('Could not save to localStorage:', e);
+  }
 }, 120000);
 
 // LOAD DATA ON PAGE LOAD
 window.addEventListener('load', () => {
-  document.querySelectorAll("input, select, textarea").forEach(el => {
-    if(el.type==='file') return;
-    if(localStorage.getItem(el.id)) el.value = localStorage.getItem(el.id);
-  });
-
-  if(localStorage.getItem('sigCustomer')){
-    const img = new Image(); img.src = localStorage.getItem('sigCustomer');
-    img.onload = () => sigCustomer.fromDataURL(img.src);
-  }
-  if(localStorage.getItem('sigCompany')){
-    const img = new Image(); img.src = localStorage.getItem('sigCompany');
-    img.onload = () => sigCompany.fromDataURL(img.src);
+  try {
+    const savedData = localStorage.getItem('cargoFormData');
+    if (savedData) {
+      const data = JSON.parse(savedData);
+      
+      Object.keys(data).forEach(key => {
+        if (key === 'sigCustomer' && data[key]) {
+          const img = new Image();
+          img.src = data[key];
+          img.onload = () => sigCustomer.fromDataURL(img.src);
+        } else if (key === 'sigCompany' && data[key]) {
+          const img = new Image();
+          img.src = data[key];
+          img.onload = () => sigCompany.fromDataURL(img.src);
+        } else {
+          const el = document.getElementById(key);
+          if (el && data[key]) {
+            el.value = data[key];
+            if (el.value) el.classList.add('filled');
+          }
+        }
+      });
+    }
+  } catch (e) {
+    console.error('Could not load from localStorage:', e);
   }
 });
 </script>
