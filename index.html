@@ -1,550 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EGO Express - Simplifying Global Trade</title>
+    <title>Coming Soon</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* Hero Section with Video */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Fixed Video Background */
-        .hero-video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 0;
-        }
-
-        .hero-video-container iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 100vh;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-
-        @media (min-aspect-ratio: 16/9) {
-            .hero-video-container iframe {
-                height: 56.25vw;
-            }
-        }
-
-        @media (max-aspect-ratio: 16/9) {
-            .hero-video-container iframe {
-                width: 177.78vh;
-            }
-        }
-
-        .hero-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 50%, rgba(0,0,0,0.2) 100%);
-            z-index: 1;
-        }
-
-        .logo {
-            position: absolute;
-            top: 50%;
-            left: 100px;
-            transform: translateY(-50%);
-            z-index: 1000;
-            margin-bottom: 400px;
-            opacity: 0;
-            animation: slideUp 1.2s ease-out 0.3s forwards;
-        }
-
-        .logo img {
-            height: 180px;
-            width: auto;
-            max-width: 500px;
-            display: block;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(-50%) translateY(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(-50%) translateY(0);
-            }
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 100px;
-            transform: translateY(-50%);
-            z-index: 5;
-            max-width: 600px;
-            margin-top: 200px;
-            opacity: 0;
-            animation: slideUp 1.2s ease-out 0.6s forwards;
-        }
-
-        .hero-content h2 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 400;
-            letter-spacing: 2px;
-        }
-
-        .hero-content h1 {
-            font-size: 72px;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 30px;
-        }
-
-        .hero-content h1 .red {
-            color: #FF3333;
-        }
-
-        .hero-content h1 .black {
-            color: #000;
-        }
-
-        /* About Section */
-        .about-section {
-            position: relative;
-            background: linear-gradient(180deg, #f8f5f0 0%, #ffffff 100%);
-            padding: 80px 60px;
-            z-index: 10;
-        }
-
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 56px;
-            font-weight: 900;
-            color: #FF3333;
-            line-height: 1.1;
-            margin-bottom: 0;
-            text-align: left;
-        }
-
-        .about-description {
-            font-size: 19px;
-            line-height: 1.7;
-            color: #FF3333;
-            text-align: left;
-        }
-
-        /* Services Section */
-        .services-section {
-            position: relative;
-            background: #FF3333;
-            padding: 80px 60px;
-            z-index: 10;
-        }
-
-        .services-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .services-header h2 {
-            font-size: 72px;
-            color: white;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-        }
-
-        .services-header p {
-            font-size: 22px;
-            color: white;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 80px 100px;
-        }
-
-        .service-card {
+            min-height: 100vh;
             display: flex;
-            gap: 25px;
-            align-items: flex-start;
-            text-align: left;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1f2933, #374151);
+            color: #ffffff;
+            text-align: center;
         }
 
-        .service-icon {
-            font-size: 70px;
-            flex-shrink: 0;
+        .container {
+            padding: 40px 30px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            max-width: 500px;
+            width: 90%;
         }
 
-        .service-content h3 {
-            font-size: 38px;
-            color: white;
-            font-weight: 900;
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            letter-spacing: 2px;
             margin-bottom: 15px;
-            text-transform: uppercase;
-            text-align: left;
         }
 
-        .service-content p {
-            font-size: 17px;
-            color: white;
-            line-height: 1.6;
-            text-align: left;
+        p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #d1d5db;
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .logo {
-                left: 40px;
-                transform: translateY(-50%);
-                margin-bottom: 350px;
-            }
-
-            .logo img {
-                height: 120px;
-                max-width: 350px;
-            }
-
-            .hero-content {
-                left: 40px;
-                max-width: calc(100% - 80px);
-                margin-top: 150px;
-            }
-
-            .hero-content h2 {
-                font-size: 18px;
-            }
-
-            .hero-content h1 {
-                font-size: 44px;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-            }
-
-            .about-text h2 {
-                font-size: 42px;
-                text-align: center;
-            }
-
-            .about-description {
-                font-size: 16px;
-                text-align: center;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .services-header h2 {
-                font-size: 52px;
-            }
-
-            .service-content h3 {
-                font-size: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                left: 20px;
-                transform: translateY(-50%);
-                margin-bottom: 300px;
-                text-align: left;
-            }
-
-            .logo img {
-                height: 110px;
-                max-width: 280px;
-                margin: 0;
-            }
-
-            .hero-content {
-                left: 20px;
-                right: auto;
-                max-width: calc(100% - 40px);
-                top: 45%;
-                margin-top: 160px;
-                text-align: left;
-            }
-
-            .hero-content h2 {
-                font-size: 11px;
-                margin-bottom: 15px;
-                text-align: left;
-            }
-
-            .hero-content h1 {
-                font-size: 32px;
-                text-align: left;
-            }
-
-            .about-section,
-            .services-section {
-                padding: 50px 20px;
-            }
-
-            .about-text h2 {
-                font-size: 32px;
-                text-align: center;
-            }
-
-            .about-description {
-                font-size: 15px;
-                text-align: center;
-            }
-
-            .services-header h2 {
-                font-size: 36px;
-                margin-bottom: 20px;
-            }
-
-            .services-header p {
-                font-size: 16px;
-            }
-
-            .service-card {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-                align-items: center;
-            }
-
-            .service-content h3,
-            .service-content p,
-            .about-text h2,
-            .about-description {
-                text-align: center;
-            }
-
-            .service-icon {
-                font-size: 60px;
-            }
-
-            .service-content h3 {
-                font-size: 24px;
-            }
-
-            .service-content p {
-                font-size: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                left: 15px;
-                transform: translateY(-50%);
-                margin-bottom: 260px;
-            }
-
-            .logo img {
-                height: 90px;
-                max-width: 250px;
-            }
-
-            .hero-content {
-                left: 15px;
-                right: auto;
-                transform: translateY(-50%);
-                max-width: calc(100% - 30px);
-                margin-top: 140px;
-                text-align: left;
-            }
-
-            .hero-content h2 {
-                font-size: 10px;
-                letter-spacing: 1px;
-                text-align: left;
-            }
-
-            .hero-content h1 {
-                font-size: 26px;
-                text-align: left;
-            }
-
-            .about-section {
-                padding: 40px 15px;
-            }
-
-            .about-text h2 {
-                font-size: 28px;
-            }
-
-            .about-description {
-                font-size: 14px;
-            }
-
-            .services-section {
-                padding: 40px 15px;
-            }
-
-            .services-header h2 {
-                font-size: 28px;
-            }
-
-            .services-header p {
-                font-size: 14px;
-            }
-
-            .services-grid {
-                gap: 35px;
-            }
-
-            .service-icon {
-                font-size: 50px;
-            }
-
-            .service-content h3 {
-                font-size: 20px;
-            }
-
-            .service-content p {
-                font-size: 14px;
-            }
-        }
-
-        /* Landscape phones */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .hero-section {
-                height: auto;
-                min-height: 100vh;
-            }
-
-            .hero-content {
-                top: 50%;
-            }
-
-            .hero-content h1 {
-                font-size: 36px;
-            }
+        .line {
+            width: 60px;
+            height: 3px;
+            background: #38bdf8;
+            margin: 20px auto;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section with Vimeo Video Background -->
-    <section class="hero-section">
-        <!-- Vimeo Background Video -->
-        <div class="hero-video-container">
-            <iframe 
-                src="https://player.vimeo.com/video/1152546989?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
-                frameborder="0" 
-                allow="autoplay; fullscreen; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
-        
-        <div class="hero-overlay"></div>
-        
-        <!-- Logo -->
-        <div class="logo">
-            <img src="https://i.postimg.cc/k5RM67Nt/logo-(2).png" alt="EGO Express Logo">
-        </div>
 
-        <!-- Hero Content -->
-        <div class="hero-content">
-            <h2>SIMPLIFYING GLOBAL TRADE</h2>
-            <h1>
-                <span class="red">Your</span> <span class="black">Freight,</span><br>
-                <span class="black">Our</span> <span class="red">Focus</span>
-            </h1>
-        </div>
-    </section>
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <div class="line"></div>
+        <p>We are working on something amazing</p>
+    </div>
 
-    <!-- About Section -->
-    <section class="about-section">
-        <div class="about-content">
-            <div class="about-text">
-                <h2>Seamless<br>Global Logistics</h2>
-            </div>
-            <div class="about-description">
-                <p>We manage the complexity of international transport, offering reliable, end-to-end freight solutions across air, sea, and land. We are connecting the world, one shipment at a time.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services-section">
-        <div class="services-header">
-            <h2>Services We Offer</h2>
-            <p>Our comprehensive logistics services integrate the best of global transport.</p>
-        </div>
-
-        <div class="services-grid">
-            <!-- Cargo Transport -->
-            <div class="service-card">
-                <div class="service-icon">🚚</div>
-                <div class="service-content">
-                    <h3>CARGO TRANSPORT</h3>
-                    <p>We provide comprehensive, end-to-end movement for goods of any size and scale.</p>
-                </div>
-            </div>
-
-            <!-- Customs Brokerage -->
-            <div class="service-card">
-                <div class="service-icon">📋</div>
-                <div class="service-content">
-                    <h3>CUSTOMS BROKERAGE</h3>
-                    <p>We offer proactive, technology-driven customs clearance solutions that reduce processing time.</p>
-                </div>
-            </div>
-
-            <!-- Warehousing -->
-            <div class="service-card">
-                <div class="service-icon">🏭</div>
-                <div class="service-content">
-                    <h3>WAREHOUSING</h3>
-                    <p>We provide secure, strategic, and scalable warehousing solutions worldwide.</p>
-                </div>
-            </div>
-
-            <!-- Supply Chain Management -->
-            <div class="service-card">
-                <div class="service-icon">📦</div>
-                <div class="service-content">
-                    <h3>SUPPLY CHAIN MANAGEMENT</h3>
-                    <p>We are dedicated to transforming your end-to-end global operations.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 </body>
 </html>
