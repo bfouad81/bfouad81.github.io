@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="شركة رائدة في أعمال العزل والمقاولات - عزل مائي، عزل حراري، فوم، مواد بناء ومستلزمات تشطيب | Leading insulation & construction company"/>
 <meta name="keywords" content="عزل مائي, عزل حراري, فوم عزل, مقاولات, مواد بناء, waterproofing, thermal insulation, foam insulation"/>
-<title>توب بلد | Top Build - Premium Insulation & Construction Solutions</title>
+<title>توب بيلد | Top Build - Premium Insulation & Construction Solutions</title>
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -308,7 +308,166 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
 .fade-right{opacity:0;transform:translateX(30px);transition:opacity 0.7s ease,transform 0.7s ease}
 .fade-right.visible{opacity:1;transform:translateX(0)}
 
-/* ======= RESPONSIVE ======= */
+/* ======= THEME SWITCHER ======= */
+/* ---- DAY MODE: full contrast override ---- */
+body.day-mode{
+  --black:    #f0ede8;   /* page bg warm off-white */
+  --charcoal: #e4e0d8;   /* section bg */
+  --dark:     #d8d3c8;
+  --card-bg:  #ffffff;
+  --white:    #1c1c22;   /* ALL text → near-black */
+  --gray:     #4a4a5a;   /* subtext → dark gray */
+  --metal:    #b0aaa0;
+  --border:   rgba(180,100,0,0.18);
+  --glow-o:   rgba(200,80,0,0.2);
+  --glow-b:   rgba(0,100,160,0.15);
+}
+/* Page & section backgrounds */
+body.day-mode,
+body.day-mode section,
+body.day-mode #gallery,
+body.day-mode #why,
+body.day-mode #testimonials,
+body.day-mode #contact,
+body.day-mode footer{background:var(--black)}
+body.day-mode #hero{background:linear-gradient(160deg,#ede8df 0%,#dfd9cf 100%)}
+body.day-mode .hero-bg{background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(255,120,0,0.08) 0%,transparent 70%)}
+body.day-mode .hero-grid{opacity:0.15}
+/* Nav */
+body.day-mode nav{background:rgba(240,237,232,0.85);backdrop-filter:blur(20px)}
+body.day-mode nav.scrolled{background:rgba(240,237,232,0.97);box-shadow:0 4px 24px rgba(0,0,0,0.1);border-bottom:1px solid rgba(180,100,0,0.15)}
+body.day-mode .nav-links a{color:#3a3a48}
+body.day-mode .nav-links a:hover{color:var(--orange)}
+body.day-mode .nav-brand{background:linear-gradient(135deg,#cc4400,#a03000);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* Hero text */
+body.day-mode .hero-title .line1{background:linear-gradient(135deg,#1c1c22 30%,#cc4400);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.day-mode .hero-title .line2{background:linear-gradient(135deg,#003a5c,#1c1c22);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.day-mode .hero-sub{color:#4a4a5a}
+body.day-mode .hero-badge{background:rgba(200,80,0,0.1);border-color:rgba(200,80,0,0.3);color:#cc4400}
+body.day-mode .hero-stat .num{background:linear-gradient(135deg,#cc4400,#884400);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.day-mode .hero-stat .label{color:#5a5060}
+/* Cards */
+body.day-mode .service-card{background:#fff;border:1px solid rgba(180,100,0,0.14);box-shadow:0 4px 20px rgba(0,0,0,0.07)}
+body.day-mode .service-title{color:#1c1c22}
+body.day-mode .service-desc{color:#4a4a5a}
+body.day-mode .stat-card{background:#fff;border:1px solid rgba(180,100,0,0.14);box-shadow:0 4px 20px rgba(0,0,0,0.07)}
+body.day-mode .stat-card::before{background:linear-gradient(90deg,#cc4400,#ff8c35)}
+body.day-mode .stat-number{background:linear-gradient(135deg,#cc4400,#884400);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.day-mode .stat-label{color:#4a4a5a}
+body.day-mode .stat-icon{color:#cc4400}
+body.day-mode .feature-item{background:#fff;border:1px solid rgba(180,100,0,0.14)}
+body.day-mode .feature-title{color:#1c1c22}
+body.day-mode .feature-desc{color:#4a4a5a}
+body.day-mode .feature-icon{background:rgba(200,80,0,0.1);border-color:rgba(200,80,0,0.2);color:#cc4400}
+body.day-mode .testi-card{background:#fff;border:1px solid rgba(180,100,0,0.12)}
+body.day-mode .testi-text{color:#4a4a5a}
+body.day-mode .testi-name{color:#1c1c22}
+body.day-mode .testi-city{color:#6a6a7a}
+/* Section headings & tags */
+body.day-mode .section-title{color:#1c1c22}
+body.day-mode .section-sub{color:#4a4a5a}
+body.day-mode .section-tag{background:rgba(200,80,0,0.08);border-color:rgba(200,80,0,0.2);color:#cc4400}
+/* Form */
+body.day-mode .quote-form{background:#fff;border:1px solid rgba(180,100,0,0.15)}
+body.day-mode .form-title{color:#1c1c22}
+body.day-mode .form-sub{color:#4a4a5a}
+body.day-mode .form-group label{color:#5a5060}
+body.day-mode .form-group input,
+body.day-mode .form-group select,
+body.day-mode .form-group textarea{background:#f4f1ec;border-color:rgba(180,100,0,0.2);color:#1c1c22}
+body.day-mode .form-group input::placeholder,
+body.day-mode .form-group textarea::placeholder{color:#9a9090}
+body.day-mode .form-group select option{background:#f4f1ec;color:#1c1c22}
+body.day-mode .upload-area{border-color:rgba(180,100,0,0.25)}
+body.day-mode .upload-text{color:#6a6070}
+/* Contact details */
+body.day-mode .contact-detail{background:#fff;border-color:rgba(180,100,0,0.14);color:#1c1c22}
+body.day-mode .contact-detail strong{color:#1c1c22}
+body.day-mode .contact-detail small{color:#6a6070}
+body.day-mode .contact-detail-icon{background:rgba(200,80,0,0.1);color:#cc4400}
+body.day-mode .contact-headline{color:#1c1c22}
+/* Footer */
+body.day-mode footer{background:#e4e0d8;border-top:1px solid rgba(180,100,0,0.15)}
+body.day-mode .footer-brand-name{background:linear-gradient(135deg,#cc4400,#884400);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.day-mode .footer-brand-desc{color:#5a5060}
+body.day-mode .footer-col h4{color:#1c1c22}
+body.day-mode .footer-links a{color:#5a5060}
+body.day-mode .footer-links a:hover{color:#cc4400}
+body.day-mode .footer-copy{color:#6a6070}
+body.day-mode .social-link{background:rgba(0,0,0,0.06);border-color:rgba(180,100,0,0.2);color:#5a5060}
+body.day-mode .social-link:hover{background:#cc4400;color:#fff}
+/* Loader bg */
+body.day-mode #loader{background:#f0ede8}
+body.day-mode #particles-canvas{opacity:0.2}
+/* Nav brand btn in day mode */
+body.day-mode .btn-lang{color:#5a5060;border-color:rgba(180,100,0,0.25)}
+body.day-mode .btn-lang:hover{color:#cc4400;border-color:#cc4400}
+body.day-mode .mobile-nav{background:rgba(240,237,232,0.99)}
+body.day-mode .mobile-nav a{color:#1c1c22}
+/* Theme panel in day mode */
+body.day-mode .theme-panel{background:rgba(240,237,232,0.97)}
+body.day-mode .theme-toggle-btn{background:rgba(240,237,232,0.9);color:#1c1c22}
+/* Shapes */
+body.day-mode .shape-1{border-color:rgba(200,80,0,0.2)}
+body.day-mode .shape-2{border-color:rgba(0,100,160,0.2)}
+/* Map overlay */
+body.day-mode .footer-map-mini iframe{filter:grayscale(30%) brightness(1)}
+/* Gallery */
+body.day-mode #gallery{background:#e4e0d8}
+/* Hero scroll */
+body.day-mode .hero-scroll{color:#6a6070}
+body.day-mode .scroll-arrow{border-color:rgba(200,80,0,0.4)}
+/* Divider */
+body.day-mode .divider{background:linear-gradient(90deg,#cc4400,#0077aa)}
+
+/* Color themes */
+body.theme-blue{--orange:#0099ff;--orange-light:#33bbff;--yellow:#00ccff;--border:rgba(0,153,255,0.2);--glow-o:rgba(0,153,255,0.35)}
+body.theme-green{--orange:#00c853;--orange-light:#69f0ae;--yellow:#b9f6ca;--border:rgba(0,200,83,0.2);--glow-o:rgba(0,200,83,0.35)}
+body.theme-purple{--orange:#9c27b0;--orange-light:#ce93d8;--yellow:#f3e5f5;--border:rgba(156,39,176,0.2);--glow-o:rgba(156,39,176,0.35)}
+body.theme-red{--orange:#f44336;--orange-light:#ef9a9a;--yellow:#ffcdd2;--border:rgba(244,67,54,0.2);--glow-o:rgba(244,67,54,0.35)}
+body.theme-teal{--orange:#00bcd4;--orange-light:#80deea;--yellow:#e0f7fa;--border:rgba(0,188,212,0.2);--glow-o:rgba(0,188,212,0.35)}
+
+/* Theme Switcher Widget */
+.theme-switcher{position:fixed;bottom:100px;left:28px;z-index:901;display:flex;flex-direction:column;align-items:center;gap:8px}
+body.ltr .theme-switcher{left:auto;right:28px}
+.theme-panel{background:rgba(5,5,8,0.92);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px;align-items:center;transition:all 0.4s cubic-bezier(0.2,0.8,0.2,1);max-height:0;overflow:hidden;opacity:0;padding:0;border:none}
+.theme-panel.open{max-height:400px;opacity:1;padding:12px;border:1px solid var(--border)}
+.theme-toggle-btn{width:42px;height:42px;background:rgba(5,5,8,0.88);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.3);backdrop-filter:blur(16px)}
+.theme-toggle-btn:hover{transform:scale(1.1);border-color:var(--orange)}
+.theme-sep{width:30px;height:1px;background:var(--border);border-radius:1px}
+.daynight-btn{width:38px;height:38px;border-radius:50%;border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.3s;background:rgba(255,255,255,0.06)}
+.daynight-btn:hover,.daynight-btn.active{border-color:var(--orange);background:rgba(255,107,0,0.15);transform:scale(1.1)}
+.color-dot{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all 0.3s;position:relative}
+.color-dot:hover,.color-dot.active{transform:scale(1.25);border-color:var(--white)}
+.color-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid transparent;transition:border-color 0.3s}
+.color-dot.active::after{border-color:rgba(255,255,255,0.5)}
+.color-dot[data-theme="default"]{background:linear-gradient(135deg,#ff6b00,#f5c518)}
+.color-dot[data-theme="blue"]{background:linear-gradient(135deg,#0099ff,#00ccff)}
+.color-dot[data-theme="green"]{background:linear-gradient(135deg,#00c853,#69f0ae)}
+.color-dot[data-theme="purple"]{background:linear-gradient(135deg,#9c27b0,#ce93d8)}
+.color-dot[data-theme="red"]{background:linear-gradient(135deg,#f44336,#ef9a9a)}
+.color-dot[data-theme="teal"]{background:linear-gradient(135deg,#00bcd4,#80deea)}
+.theme-label{font-size:9px;color:var(--gray);letter-spacing:1px;text-align:center;margin-top:2px}
+
+/* Footer map mini */
+.footer-map-mini{border-radius:12px;overflow:hidden;height:180px;border:1px solid var(--border);margin-top:16px}
+.footer-map-mini iframe{width:100%;height:100%;border:0;filter:grayscale(60%) brightness(0.8)}
+
+/* ======= RAIN CARD ======= */
+.rain-card{position:relative;background:linear-gradient(145deg,#0a0a14,#12121e);border:1px solid rgba(0,180,255,0.2);border-radius:20px;overflow:hidden;margin-top:48px;padding:36px 32px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;box-shadow:0 8px 40px rgba(0,100,200,0.15),0 0 0 1px rgba(0,180,255,0.08)}
+.rain-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,180,255,0.04),rgba(255,107,0,0.03));pointer-events:none}
+#rainCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.rain-card-content{position:relative;z-index:2;flex:1;min-width:220px}
+.rain-card-icon{font-size:52px;margin-bottom:12px;display:block;filter:drop-shadow(0 0 16px rgba(0,180,255,0.6))}
+.rain-card-title{font-size:clamp(20px,2.5vw,32px);font-weight:900;line-height:1.2;margin-bottom:10px}
+.rain-card-title span{background:linear-gradient(135deg,#00d4ff,#0077ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.rain-card-sub{color:#8090a0;font-size:14px;line-height:1.7;max-width:420px}
+.rain-card-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.rain-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,180,255,0.08);border:1px solid rgba(0,180,255,0.2);border-radius:99px;padding:5px 14px;font-size:12px;color:#00d4ff}
+.rain-card-visual{position:relative;z-index:2;width:160px;height:160px;flex-shrink:0}
+.shield-svg{width:100%;height:100%;filter:drop-shadow(0 0 24px rgba(0,180,255,0.5))}
+/* Splash particles from rain card canvas */
+.rain-paused #rainCanvas{animation-play-state:paused}
 @media(max-width:1024px){
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .contact-grid{grid-template-columns:1fr}
@@ -349,7 +508,7 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
     <img src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="شعار الشركة" onerror="this.style.display='none'"/>
   </div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
-  <div class="loader-text">LOADING Top Build...</div>
+  <div class="loader-text">LOADING TOP BUILD...</div>
 </div>
 
 <!-- ======= CANVAS PARTICLES ======= -->
@@ -369,8 +528,8 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
 <!-- ======= NAV ======= -->
 <nav id="navbar">
   <a href="#hero" class="nav-logo">
-    <img src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="شعار إيزول بلس" onerror="this.style.display='none'"/>
-    <span class="nav-brand">Top Build</span>
+    <img src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="شعار توب بيلد" onerror="this.style.display='none'"/>
+    <span class="nav-brand">TOP BUILD</span>
   </a>
   <ul class="nav-links">
     <li><a href="#services"><span class="ar-text">الخدمات</span><span class="en-text">Services</span></a></li>
@@ -408,7 +567,7 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
     <div class="hero-logo-wrap">
       <div class="hero-logo-ring2"></div>
       <div class="hero-logo-ring"></div>
-      <img class="hero-logo" src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="إيزول بلس - شركة العزل والمقاولات" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMwIiBoZWlnaHQ9IjEzMCIgdmlld0JveD0iMCAwIDEzMCAxMzAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjUiIGN5PSI2NSIgcj0iNjUiIGZpbGw9IiMxQTFBMjQiLz48dGV4dCB4PSI1MCUiIHk9IjU1JSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzMCIgZmlsbD0iI0ZGNkIwMCIgZm9udC1mYW1pbHk9IkFyaWFsIj5JUDwvdGV4dD48L3N2Zz4='"/>
+      <img class="hero-logo" src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="توب بيلد - Top Build" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMwIiBoZWlnaHQ9IjEzMCIgdmlld0JveD0iMCAwIDEzMCAxMzAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjUiIGN5PSI2NSIgcj0iNjUiIGZpbGw9IiMxQTFBMjQiLz48dGV4dCB4PSI1MCUiIHk9IjU1JSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzMCIgZmlsbD0iI0ZGNkIwMCIgZm9udC1mYW1pbHk9IkFyaWFsIj5JUDwvdGV4dD48L3N2Zz4='"/>
     </div>
 
     <div class="hero-badge">
@@ -468,6 +627,50 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
       <div class="hero-stat">
         <div class="num" data-count="500">0</div>
         <div class="label"><span class="ar-text">عميل موثوق</span><span class="en-text">Clients</span></div>
+      </div>
+    </div>
+
+    <!-- ===== RAIN INSULATION CARD ===== -->
+    <div class="rain-card" id="rainCard" style="max-width:820px;margin:40px auto 0">
+      <canvas id="rainCanvas"></canvas>
+      <div class="rain-card-content">
+        <span class="rain-card-icon">🛡️</span>
+        <div class="rain-card-title">
+          <span class="ar-text">نحمي ما بداخلك<br/><span>من كل الظروف</span></span>
+          <span class="en-text">We Protect What's Inside<br/><span>From Every Condition</span></span>
+        </div>
+        <p class="rain-card-sub">
+          <span class="ar-text">سواء كان مطراً غزيراً أو حرارة شديدة — أنظمتنا للعزل تحمي مبناك تماماً. حرك الماوس عن الكارت لترى المطر يتوقف 😉</span>
+          <span class="en-text">Whether torrential rain or extreme heat — our insulation systems fully protect your building. Move mouse away to see the rain stop 😉</span>
+        </p>
+        <div class="rain-card-badges">
+          <span class="rain-badge">💧 <span class="ar-text">عزل مائي</span><span class="en-text">Waterproofing</span></span>
+          <span class="rain-badge">🌡️ <span class="ar-text">عزل حراري</span><span class="en-text">Thermal</span></span>
+          <span class="rain-badge">💨 <span class="ar-text">فوم عزل</span><span class="en-text">Foam</span></span>
+          <span class="rain-badge">🏗️ <span class="ar-text">ضمان 10 سنوات</span><span class="en-text">10yr Warranty</span></span>
+        </div>
+      </div>
+      <div class="rain-card-visual">
+        <svg class="shield-svg" viewBox="0 0 160 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#0055cc" stop-opacity="0.7"/>
+            </linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- Shield shape -->
+          <path d="M80 8 L148 36 L148 90 Q148 140 80 172 Q12 140 12 90 L12 36 Z" fill="url(#sg1)" opacity="0.15" stroke="rgba(0,212,255,0.6)" stroke-width="2" filter="url(#glow)"/>
+          <path d="M80 22 L136 46 L136 90 Q136 132 80 158 Q24 132 24 90 L24 46 Z" fill="rgba(0,180,255,0.08)" stroke="rgba(0,212,255,0.4)" stroke-width="1.5"/>
+          <!-- Check mark -->
+          <path d="M52 88 L70 108 L112 66" stroke="#00d4ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+          <!-- Water drop icon -->
+          <path d="M80 52 Q80 52 68 68 Q62 76 62 82 Q62 94 80 94 Q98 94 98 82 Q98 76 92 68 Z" fill="rgba(0,212,255,0.3)" stroke="#00d4ff" stroke-width="1.5"/>
+          <!-- Animated ring -->
+          <circle cx="80" cy="90" r="60" stroke="rgba(0,212,255,0.15)" stroke-width="1" stroke-dasharray="8 4">
+            <animateTransform attributeName="transform" type="rotate" values="0 80 90;360 80 90" dur="12s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
       </div>
     </div>
   </div>
@@ -941,21 +1144,21 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
           <div class="contact-detail-icon"><i class="fas fa-phone"></i></div>
           <div class="contact-detail-text">
             <small><span class="ar-text">اتصل بنا</span><span class="en-text">CALL US</span></small>
-            <strong>+201065008435</strong>
+            <strong>+20 106 500 8435</strong>
           </div>
         </a>
         <a href="https://wa.me/201065008435" class="contact-detail" target="_blank">
           <div class="contact-detail-icon" style="background:rgba(37,211,102,0.15);color:#25d366"><i class="fab fa-whatsapp"></i></div>
           <div class="contact-detail-text">
             <small>WHATSAPP</small>
-            <strong>+201065008435</strong>
+            <strong>+20 106 500 8435</strong>
           </div>
         </a>
-        <a href="mailto:topbuildtrade@hotmail.com" class="contact-detail">
+        <a href="mailto:TopBuildtrade@hotmail.com" class="contact-detail">
           <div class="contact-detail-icon"><i class="fas fa-envelope"></i></div>
           <div class="contact-detail-text">
             <small>EMAIL</small>
-            <strong>topbuildtrade@hotmail.com</strong>
+            <strong>TopBuildtrade@hotmail.com</strong>
           </div>
         </a>
         <div class="contact-detail">
@@ -1067,8 +1270,20 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
       <div class="section-tag" style="margin:0 auto 16px"><i class="fas fa-map-marked-alt"></i> <span class="ar-text">موقعنا</span><span class="en-text">OUR LOCATION</span></div>
       <h2 class="section-title"><span class="ar-text">ابحث عنا على <span>الخريطة</span></span><span class="en-text">Find Us on the <span>Map</span></span></h2>
     </div>
-    <div class="map-container fade-in" style="border-radius:20px;overflow:hidden;height:400px;border:1px solid var(--border)">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220893.6752929836!2d31.24967245!3d30.06262695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Egypt!5e0!3m2!1sen!2seg!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+    <div class="map-container fade-in" style="border-radius:20px;overflow:hidden;height:420px;border:1px solid var(--border);position:relative">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3452.7!2d31.253074!3d30.095679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzDCsDA1JzQ0LjQiTiAzMcKwMTUnMTEuMSJF!5e0!3m2!1sen!2seg!4v1717000000001"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <!-- Map marker overlay card -->
+      <div style="position:absolute;bottom:20px;right:20px;background:rgba(5,5,8,0.92);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);z-index:10">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,var(--orange),var(--orange-light));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📍</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:2px">TOP BUILD</div>
+          <div style="font-size:11px;color:var(--gray)"><span class="ar-text">مقر الشركة — القاهرة، مصر</span><span class="en-text">Head Office — Cairo, Egypt</span></div>
+          <div style="font-size:10px;color:var(--orange);margin-top:2px">30.095679, 31.253074</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1078,8 +1293,8 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="إيزول بلس" onerror="this.style.display='none'"/>
-        <div class="footer-brand-name">Top Build</div>
+        <img src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="توب بيلد - Top Build" onerror="this.style.display='none'"/>
+        <div class="footer-brand-name">TOP BUILD</div>
         <div class="footer-brand-desc">
           <span class="ar-text">شركة رائدة في أعمال العزل والمقاولات — عزل مائي، عزل حراري، فوم، مواد بناء ومستلزمات تشطيب بأعلى معايير الجودة</span>
           <span class="en-text">Leading company in insulation and contracting — waterproofing, thermal insulation, foam, construction supplies and finishing materials at the highest quality standards.</span>
@@ -1090,6 +1305,25 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
           <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
           <a href="https://wa.me/201065008435" class="social-link"><i class="fab fa-whatsapp"></i></a>
           <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <!-- Mini Map in Footer -->
+        <div style="margin-top:20px">
+          <div style="font-size:11px;color:var(--gray);letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px">
+            <i class="fas fa-map-marker-alt" style="color:var(--orange)"></i>
+            <span class="ar-text">موقعنا على الخريطة</span><span class="en-text">Our Location</span>
+          </div>
+          <div class="footer-map-mini">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3452.7!2d31.253074!3d30.095679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzDCsDA1JzQ0LjQiTiAzMcKwMTUnMTEuMSJF!5e0!3m2!1sar!2seg!4v1717000000002"
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <a href="https://maps.google.com/?q=30.095679,31.253074" target="_blank"
+             style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:11px;color:var(--orange);text-decoration:none;transition:opacity 0.3s"
+             onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">
+            <i class="fas fa-directions"></i>
+            <span class="ar-text">احصل على الاتجاهات</span><span class="en-text">Get Directions</span>
+          </a>
         </div>
       </div>
       <div class="footer-col">
@@ -1116,16 +1350,16 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
       <div class="footer-col">
         <h4><span class="ar-text">تواصل معنا</span><span class="en-text">Contact</span></h4>
         <ul class="footer-links">
-          <li><a href="tel:+201065008435"><i class="fas fa-phone" style="margin-left:4px"></i> +201065008435</a></li>
+          <li><a href="tel:+201065008435"><i class="fas fa-phone" style="margin-left:4px"></i> +20 106 500 8435</a></li>
           <li><a href="https://wa.me/201065008435"><i class="fab fa-whatsapp" style="margin-left:4px"></i> WhatsApp</a></li>
-          <li><a href="mailto:topbuildtrade@hotmail.com"><i class="fas fa-envelope" style="margin-left:4px"></i> topbuildtrade@hotmail.com</a></li>
+          <li><a href="mailto:TopBuildtrade@hotmail.com"><i class="fas fa-envelope" style="margin-left:4px"></i> TopBuildtrade@hotmail.com</a></li>
           <li><a href="#map-section"><i class="fas fa-map-marker-alt" style="margin-left:4px"></i> <span class="ar-text">القاهرة، مصر</span><span class="en-text">Cairo, Egypt</span></a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">
-        © 2025 <span>Top Build</span> — <span class="ar-text">جميع الحقوق محفوظة</span><span class="en-text">All Rights Reserved</span>
+        © 2025 <span>TOP BUILD</span> — <span class="ar-text">جميع الحقوق محفوظة</span><span class="en-text">All Rights Reserved</span>
       </div>
       <div class="footer-copy">
         <span class="ar-text">بُني بـ ❤️ لخدمة عملائنا الكرام</span>
@@ -1144,6 +1378,28 @@ body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
   <a href="https://wa.me/201065008435" target="_blank" class="wa-btn">
     <i class="fab fa-whatsapp"></i>
   </a>
+</div>
+
+<!-- ======= THEME SWITCHER ======= -->
+<div class="theme-switcher" id="themeSwitcher">
+  <!-- Panel (opens upward) -->
+  <div class="theme-panel" id="themePanel">
+    <!-- Day / Night -->
+    <div class="theme-label"><span class="ar-text">وضع العرض</span><span class="en-text">MODE</span></div>
+    <button class="daynight-btn active" id="btnNight" title="Night Mode" onclick="setDayNight('night')">🌙</button>
+    <button class="daynight-btn" id="btnDay" title="Day Mode" onclick="setDayNight('day')">☀️</button>
+    <div class="theme-sep"></div>
+    <!-- Color Themes -->
+    <div class="theme-label"><span class="ar-text">لون الثيم</span><span class="en-text">COLOR</span></div>
+    <div class="color-dot active" data-theme="default" title="Orange (Default)" onclick="setColorTheme('default',this)"></div>
+    <div class="color-dot" data-theme="blue"   title="Blue"   onclick="setColorTheme('blue',this)"></div>
+    <div class="color-dot" data-theme="green"  title="Green"  onclick="setColorTheme('green',this)"></div>
+    <div class="color-dot" data-theme="purple" title="Purple" onclick="setColorTheme('purple',this)"></div>
+    <div class="color-dot" data-theme="red"    title="Red"    onclick="setColorTheme('red',this)"></div>
+    <div class="color-dot" data-theme="teal"   title="Teal"   onclick="setColorTheme('teal',this)"></div>
+  </div>
+  <!-- Toggle Button -->
+  <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleThemePanel()" title="Theme Settings">🎨</button>
 </div>
 
 <!-- Scripts -->
@@ -1335,7 +1591,7 @@ function sendWhatsApp() {
   
   let msg;
   if (isAr) {
-    msg = `🏗️ *طلب عرض سعر جديد — إيزول بلس*\n\n`;
+    msg = `🏗️ *طلب عرض سعر جديد — TOP BUILD*\n\n`;
     msg += `👤 *الاسم:* ${name}\n`;
     msg += `📞 *الهاتف:* ${phone}\n`;
     msg += `🏙️ *المدينة:* ${city || 'لم يُحدد'}\n`;
@@ -1345,7 +1601,7 @@ function sendWhatsApp() {
     msg += `━━━━━━━━━━━━━━━━━━\n`;
     msg += `✅ أرجو التواصل معي في أقرب وقت ممكن. شكراً!`;
   } else {
-    msg = `🏗️ *New Quote Request — Top Build*\n\n`;
+    msg = `🏗️ *New Quote Request — TOP BUILD*\n\n`;
     msg += `👤 *Name:* ${name}\n`;
     msg += `📞 *Phone:* ${phone}\n`;
     msg += `🏙️ *City:* ${city || 'Not specified'}\n`;
@@ -1395,6 +1651,182 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// ======= THEME SWITCHER =======
+let themePanelOpen = false;
+const THEMES = ['default','blue','green','purple','red','teal'];
+
+function toggleThemePanel() {
+  themePanelOpen = !themePanelOpen;
+  const panel = document.getElementById('themePanel');
+  const btn   = document.getElementById('themeToggleBtn');
+  panel.classList.toggle('open', themePanelOpen);
+  btn.style.transform = themePanelOpen ? 'rotate(30deg) scale(1.1)' : '';
+  btn.style.borderColor = themePanelOpen ? 'var(--orange)' : '';
+}
+
+// Close panel when clicking outside
+document.addEventListener('click', e => {
+  const sw = document.getElementById('themeSwitcher');
+  if (themePanelOpen && sw && !sw.contains(e.target)) {
+    themePanelOpen = false;
+    document.getElementById('themePanel').classList.remove('open');
+    document.getElementById('themeToggleBtn').style.transform = '';
+    document.getElementById('themeToggleBtn').style.borderColor = '';
+  }
+});
+
+function setDayNight(mode) {
+  const body = document.body;
+  const btnDay   = document.getElementById('btnDay');
+  const btnNight = document.getElementById('btnNight');
+  if (mode === 'day') {
+    body.classList.add('day-mode');
+    btnDay.classList.add('active');
+    btnNight.classList.remove('active');
+    // Adjust loader bg if still visible
+    document.getElementById('loader').style.background = 'var(--black)';
+  } else {
+    body.classList.remove('day-mode');
+    btnNight.classList.add('active');
+    btnDay.classList.remove('active');
+  }
+  // Persist preference
+  try { localStorage.setItem('tb_daymode', mode); } catch(e){}
+}
+
+function setColorTheme(theme, dotEl) {
+  const body = document.body;
+  // Remove all color theme classes
+  THEMES.forEach(t => body.classList.remove('theme-' + t));
+  // Remove active from all dots
+  document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+  // Apply new theme
+  if (theme !== 'default') body.classList.add('theme-' + theme);
+  if (dotEl) dotEl.classList.add('active');
+  // Persist
+  try { localStorage.setItem('tb_colortheme', theme); } catch(e){}
+}
+
+// Restore saved preferences on load
+(function restoreTheme() {
+  try {
+    const savedMode  = localStorage.getItem('tb_daymode');
+    const savedColor = localStorage.getItem('tb_colortheme');
+    if (savedMode  === 'day')   setDayNight('day');
+    if (savedColor && savedColor !== 'default') {
+      const dot = document.querySelector(`.color-dot[data-theme="${savedColor}"]`);
+      setColorTheme(savedColor, dot);
+    }
+  } catch(e){}
+})();
+
+// ======= RAIN CARD ANIMATION =======
+(function initRain() {
+  const card = document.getElementById('rainCard');
+  const canvas = document.getElementById('rainCanvas');
+  if (!card || !canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let drops = [];
+  let splashes = [];
+  let isRaining = true;
+  let animId;
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = card.offsetWidth;
+    H = canvas.height = card.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Rain drop factory
+  function mkDrop() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * -H * 0.5,
+      len: 10 + Math.random() * 18,
+      speed: 8 + Math.random() * 14,
+      width: 0.8 + Math.random() * 0.8,
+      alpha: 0.25 + Math.random() * 0.45
+    };
+  }
+
+  // Splash particle factory
+  function mkSplash(x, y) {
+    const count = 4 + Math.floor(Math.random() * 5);
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI + Math.random() * Math.PI);
+      const speed = 1.5 + Math.random() * 3;
+      splashes.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 2,
+        alpha: 0.7 + Math.random() * 0.3,
+        r: 1 + Math.random() * 1.5,
+        life: 1
+      });
+    }
+  }
+
+  // Init drops
+  for (let i = 0; i < 120; i++) {
+    const d = mkDrop();
+    d.y = Math.random() * H; // scatter initial y
+    drops.push(d);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    if (isRaining) {
+      // Draw drops
+      drops.forEach((d, i) => {
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x - d.len * 0.15, d.y + d.len);
+        ctx.strokeStyle = `rgba(120,210,255,${d.alpha})`;
+        ctx.lineWidth = d.width;
+        ctx.stroke();
+
+        d.y += d.speed;
+        d.x -= d.speed * 0.12;
+
+        // Hit bottom → splash & reset
+        if (d.y > H) {
+          mkSplash(d.x, H - 4);
+          drops[i] = mkDrop();
+        }
+        // Off sides → reset
+        if (d.x < -20) { d.x = W + 20; d.y = Math.random() * -H * 0.3; }
+      });
+    }
+
+    // Draw splashes (always animate remaining ones)
+    splashes = splashes.filter(s => s.life > 0);
+    splashes.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(140,220,255,${s.alpha * s.life})`;
+      ctx.fill();
+      s.x  += s.vx;
+      s.y  += s.vy;
+      s.vy += 0.18; // gravity
+      s.life -= 0.045;
+    });
+
+    animId = requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Pause rain on mouse enter, resume on mouse leave
+  card.addEventListener('mouseenter', () => { isRaining = false; });
+  card.addEventListener('mouseleave', () => { isRaining = true; });
+  // Touch support
+  card.addEventListener('touchstart', () => { isRaining = false; }, {passive:true});
+  card.addEventListener('touchend',   () => { isRaining = true; });
+})();
 </script>
 </body>
 </html>
