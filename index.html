@@ -1,82 +1,1400 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="شركة رائدة في أعمال العزل والمقاولات - عزل مائي، عزل حراري، فوم، مواد بناء ومستلزمات تشطيب | Leading insulation & construction company"/>
+<meta name="keywords" content="عزل مائي, عزل حراري, فوم عزل, مقاولات, مواد بناء, waterproofing, thermal insulation, foam insulation"/>
+<title>توب بلد | Top Build - Premium Insulation & Construction Solutions</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            text-align: center;
-            background: #000; /* احتياطي لو الفيديو ما اشتغلش */
-        }
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-        video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
+<style>
+:root {
+  --black: #050508;
+  --charcoal: #111118;
+  --dark: #1a1a24;
+  --card-bg: #16161f;
+  --orange: #ff6b00;
+  --orange-light: #ff8c35;
+  --yellow: #f5c518;
+  --blue: #00d4ff;
+  --blue-glow: #0099cc;
+  --white: #f0f0f5;
+  --gray: #8a8a9a;
+  --metal: #3a3a4a;
+  --border: rgba(255,107,0,0.18);
+  --glow-o: rgba(255,107,0,0.35);
+  --glow-b: rgba(0,212,255,0.25);
+  --font-ar: 'Cairo', sans-serif;
+  --font-en: 'Rajdhani', sans-serif;
+  --font-head: 'Orbitron', monospace;
+}
 
-        .container {
-            padding: 40px 30px;
-            border-radius: 16px;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(6px);
-            max-width: 500px;
-            width: 90%;
-        }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--black);color:var(--white);font-family:var(--font-ar);overflow-x:hidden}
+body.ltr{direction:ltr;font-family:var(--font-en)}
+body.ltr *{font-family:var(--font-en)}
+body.ltr .ar-text{display:none}
+body.rtl .en-text{display:none}
+body.ltr .en-text{display:block}
+body.rtl .ar-text{display:block}
 
-        h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
+/* ======= LOADER ======= */
+#loader{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.8s ease}
+#loader.hidden{opacity:0;pointer-events:none}
+.loader-logo{width:120px;height:120px;border-radius:50%;border:3px solid transparent;background:linear-gradient(var(--black),var(--black)) padding-box,linear-gradient(135deg,var(--orange),var(--blue)) border-box;display:flex;align-items:center;justify-content:center;animation:spin 2s linear infinite}
+.loader-logo img{width:80px;height:80px;border-radius:50%;object-fit:cover}
+.loader-bar{width:200px;height:3px;background:var(--metal);border-radius:99px;margin-top:24px;overflow:hidden}
+.loader-fill{height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--blue));border-radius:99px;animation:fill 2s ease forwards}
+.loader-text{margin-top:16px;font-size:12px;letter-spacing:3px;color:var(--gray);animation:pulse 1.5s ease infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fill{to{width:100%}}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
 
-        p {
-            font-size: 1.1rem;
-            color: #e5e7eb;
-        }
+/* ======= PARTICLES CANVAS ======= */
+#particles-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
 
-        .line {
-            width: 60px;
-            height: 3px;
-            background: #38bdf8;
-            margin: 20px auto;
-            border-radius: 5px;
-        }
-    </style>
+/* ======= NAV ======= */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s ease}
+nav.scrolled{background:rgba(5,5,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);animation:float 4s ease-in-out infinite;box-shadow:0 0 18px var(--glow-o)}
+.nav-brand{font-family:var(--font-head);font-size:18px;font-weight:700;background:linear-gradient(135deg,var(--orange),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{color:var(--gray);font-size:14px;font-weight:600;text-decoration:none;transition:color 0.3s;letter-spacing:1px;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transition:transform 0.3s}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.btn-lang{background:none;border:1px solid var(--border);color:var(--gray);padding:6px 16px;border-radius:20px;cursor:pointer;font-size:13px;transition:all 0.3s;font-family:inherit}
+.btn-lang:hover{border-color:var(--orange);color:var(--orange)}
+.btn-quote-nav{background:linear-gradient(135deg,var(--orange),var(--orange-light));color:white;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:all 0.3s;box-shadow:0 4px 20px rgba(255,107,0,0.3)}
+.btn-quote-nav:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,0,0.5)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{width:24px;height:2px;background:var(--orange);border-radius:2px;transition:all 0.3s}
+
+/* ======= HERO ======= */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;z-index:1;padding-top:72px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(255,107,0,0.08) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 80% 20%,rgba(0,212,255,0.06) 0%,transparent 60%),linear-gradient(180deg,var(--black) 0%,var(--charcoal) 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,0,0.04) 1px,transparent 1px);background-size:60px 60px;opacity:0.5}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:900px}
+.hero-logo-wrap{position:relative;display:inline-block;margin-bottom:32px}
+.hero-logo{width:130px;height:130px;border-radius:50%;object-fit:cover;border:3px solid var(--orange);box-shadow:0 0 60px rgba(255,107,0,0.5),0 0 120px rgba(255,107,0,0.2);animation:float 5s ease-in-out infinite}
+.hero-logo-ring{position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(255,107,0,0.3);animation:ring-spin 8s linear infinite}
+.hero-logo-ring2{position:absolute;inset:-24px;border-radius:50%;border:1px solid rgba(0,212,255,0.2);animation:ring-spin 12s linear infinite reverse}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.3);border-radius:99px;padding:6px 16px;margin-bottom:20px;font-size:12px;color:var(--orange);letter-spacing:2px;backdrop-filter:blur(10px)}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 1.5s ease infinite}
+.hero-title{font-size:clamp(36px,6vw,80px);font-weight:900;line-height:1.1;margin-bottom:16px}
+.hero-title .line1{background:linear-gradient(135deg,#fff 30%,var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block}
+.hero-title .line2{background:linear-gradient(135deg,var(--blue),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;font-size:0.65em}
+.hero-sub{color:var(--gray);font-size:clamp(14px,1.8vw,18px);line-height:1.7;margin-bottom:40px;max-width:680px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--orange),var(--orange-light));color:white;padding:14px 32px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;border:none;font-family:inherit;transition:all 0.4s;box-shadow:0 8px 30px rgba(255,107,0,0.4);text-decoration:none}
+.btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 40px rgba(255,107,0,0.6)}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--white);padding:14px 32px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;border:1px solid var(--border);font-family:inherit;transition:all 0.4s;text-decoration:none;backdrop-filter:blur(10px)}
+.btn-secondary:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-3px)}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c7e);color:white;padding:14px 32px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;border:none;font-family:inherit;transition:all 0.4s;box-shadow:0 8px 30px rgba(37,211,102,0.3);text-decoration:none}
+.btn-wa:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 40px rgba(37,211,102,0.5)}
+.btn-blue{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue),var(--blue-glow));color:var(--black);padding:14px 32px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;border:none;font-family:inherit;transition:all 0.4s;box-shadow:0 8px 30px rgba(0,212,255,0.3);text-decoration:none}
+.btn-blue:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 40px rgba(0,212,255,0.5)}
+
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--gray);font-size:11px;letter-spacing:2px}
+.scroll-arrow{width:24px;height:36px;border:2px solid rgba(255,107,0,0.4);border-radius:12px;position:relative}
+.scroll-arrow::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:var(--orange);border-radius:2px;animation:scroll-bounce 2s ease infinite}
+@keyframes scroll-bounce{0%,100%{transform:translateX(-50%) translateY(0);opacity:1}50%{transform:translateX(-50%) translateY(8px);opacity:0.3}}
+
+/* 3D floating shapes */
+.shape{position:absolute;pointer-events:none}
+.shape-1{top:20%;right:8%;width:80px;height:80px;border:2px solid rgba(255,107,0,0.3);transform:rotate(45deg);animation:float 6s ease-in-out infinite}
+.shape-2{top:60%;left:5%;width:50px;height:50px;border:1px solid rgba(0,212,255,0.3);border-radius:50%;animation:float 8s ease-in-out infinite 2s}
+.shape-3{bottom:25%;right:12%;width:30px;height:30px;background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.3);animation:float 7s ease-in-out infinite 1s}
+.shape-4{top:40%;left:8%;width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);animation:float 5s ease-in-out infinite 3s}
+
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-15px) rotate(5deg)}}
+@keyframes ring-spin{to{transform:rotate(360deg)}}
+
+/* Hero stats */
+.hero-stats{display:flex;gap:32px;justify-content:center;margin-top:48px;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:var(--font-head);font-size:32px;font-weight:700;background:linear-gradient(135deg,var(--orange),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-stat .label{font-size:12px;color:var(--gray);letter-spacing:1px;margin-top:4px}
+
+/* ======= SECTIONS COMMON ======= */
+section{position:relative;z-index:1;padding:90px 0}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.section-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.2);border-radius:99px;padding:6px 16px;font-size:11px;color:var(--orange);letter-spacing:3px;margin-bottom:16px;text-transform:uppercase}
+.section-title{font-size:clamp(28px,4vw,52px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.section-title span{background:linear-gradient(135deg,var(--orange),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-sub{color:var(--gray);font-size:16px;line-height:1.7;max-width:600px}
+.section-header{margin-bottom:60px}
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--orange),var(--blue));border-radius:2px;margin:16px 0}
+
+/* ======= SERVICES ======= */
+#services{background:linear-gradient(180deg,var(--black) 0%,var(--charcoal) 50%,var(--black) 100%)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.service-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all 0.5s cubic-bezier(0.2,0.8,0.2,1);position:relative;cursor:pointer}
+.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,107,0,0.05),transparent);opacity:0;transition:opacity 0.5s;z-index:1;pointer-events:none}
+.service-card:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(255,107,0,0.5);box-shadow:0 20px 60px rgba(255,107,0,0.2),0 0 0 1px rgba(255,107,0,0.1)}
+.service-card:hover::before{opacity:1}
+.service-img-wrap{height:200px;position:relative;overflow:hidden}
+.service-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease}
+.service-card:hover .service-img-wrap img{transform:scale(1.08)}
+.service-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.8));z-index:1}
+.service-icon-wrap{position:absolute;top:16px;right:16px;z-index:2;width:44px;height:44px;background:rgba(255,107,0,0.9);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white;box-shadow:0 4px 20px rgba(255,107,0,0.4)}
+body.ltr .service-icon-wrap{right:auto;left:16px}
+.service-body{padding:20px;position:relative;z-index:2}
+.service-title{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--white)}
+.service-desc{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:16px}
+.service-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.2);border-radius:6px;padding:3px 10px;font-size:11px;color:var(--orange)}
+.service-arrow{position:absolute;bottom:20px;left:20px;width:32px;height:32px;background:rgba(255,107,0,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:12px;transition:all 0.3s}
+body.rtl .service-arrow{left:auto;right:20px}
+.service-card:hover .service-arrow{background:var(--orange);color:white;transform:translateX(-4px)}
+body.rtl .service-card:hover .service-arrow{transform:translateX(4px)}
+
+/* Animated border */
+.animated-border{position:relative}
+.animated-border::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--blue),var(--orange));background-size:200%;animation:slide-border 3s linear infinite;opacity:0;transition:opacity 0.4s}
+.service-card:hover .animated-border::after{opacity:1}
+@keyframes slide-border{to{background-position:200%}}
+
+/* ======= GALLERY ======= */
+#gallery{background:var(--charcoal)}
+.gallery-swiper{border-radius:20px;overflow:hidden}
+.swiper-slide img{width:100%;height:440px;object-fit:cover}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,220px);gap:12px;margin-top:40px}
+.gallery-item{border-radius:12px;overflow:hidden;position:relative;cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,107,0,0.0),rgba(0,0,0,0.4));opacity:0;transition:opacity 0.4s}
+.gallery-item:hover::after{opacity:1}
+.gallery-item.large{grid-column:span 2;grid-row:span 2}
+.swiper-pagination-bullet{background:var(--orange)!important;opacity:0.5}
+.swiper-pagination-bullet-active{opacity:1!important;width:24px!important;border-radius:4px!important}
+
+/* Before/After */
+.compare-wrap{position:relative;border-radius:20px;overflow:hidden;height:400px;margin-top:48px;cursor:ew-resize}
+.compare-before,.compare-after{position:absolute;inset:0}
+.compare-before img,.compare-after img{width:100%;height:100%;object-fit:cover}
+.compare-after{clip-path:inset(0 50% 0 0);transition:clip-path 0.05s linear}
+.compare-divider{position:absolute;top:0;bottom:0;left:50%;width:3px;background:white;z-index:10;transform:translateX(-50%)}
+.compare-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.4);cursor:ew-resize;z-index:11;color:#333;font-size:18px}
+.compare-label{position:absolute;top:16px;padding:4px 14px;background:rgba(0,0,0,0.7);color:white;font-size:12px;font-weight:700;letter-spacing:2px;border-radius:6px;z-index:12}
+.compare-label.before{left:16px}
+.compare-label.after{right:16px}
+
+/* ======= WHY US ======= */
+#why{background:linear-gradient(180deg,var(--black) 0%,var(--charcoal) 100%)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:64px}
+.stat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:32px;text-align:center;transition:all 0.4s;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--yellow))}
+.stat-card:hover{transform:translateY(-6px);border-color:rgba(255,107,0,0.4);box-shadow:0 16px 48px rgba(255,107,0,0.15)}
+.stat-number{font-family:var(--font-head);font-size:52px;font-weight:700;background:linear-gradient(135deg,var(--orange),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.stat-plus{font-size:28px}
+.stat-label{color:var(--gray);font-size:14px;margin-top:8px;letter-spacing:1px}
+.stat-icon{font-size:28px;margin-bottom:12px;color:var(--orange)}
+
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.feature-item{display:flex;gap:16px;align-items:flex-start;padding:24px;background:var(--card-bg);border:1px solid var(--border);border-radius:16px;transition:all 0.4s}
+.feature-item:hover{border-color:rgba(255,107,0,0.4);transform:translateX(4px)}
+body.rtl .feature-item:hover{transform:translateX(-4px)}
+.feature-icon{width:48px;height:48px;min-width:48px;background:linear-gradient(135deg,rgba(255,107,0,0.2),rgba(255,107,0,0.05));border:1px solid rgba(255,107,0,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--orange)}
+.feature-title{font-size:16px;font-weight:700;margin-bottom:6px}
+.feature-desc{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* ======= TESTIMONIALS ======= */
+#testimonials{background:var(--black)}
+.testi-swiper{padding:20px 0 48px!important}
+.testi-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;transition:all 0.4s}
+.testi-card::before{content:'\201C';position:absolute;top:16px;right:24px;font-size:80px;color:rgba(255,107,0,0.1);line-height:1;font-family:Georgia}
+body.ltr .testi-card::before{right:auto;left:24px}
+.testi-stars{color:var(--yellow);font-size:16px;margin-bottom:16px;letter-spacing:2px}
+.testi-text{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:20px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:48px;height:48px;border-radius:50%;border:2px solid var(--orange);object-fit:cover}
+.testi-name{font-weight:700;font-size:15px}
+.testi-city{font-size:12px;color:var(--gray);margin-top:2px}
+
+/* ======= CONTACT / QUOTATION ======= */
+#contact{background:linear-gradient(180deg,var(--charcoal) 0%,var(--black) 100%)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.contact-info{padding-top:8px}
+.contact-headline{font-size:clamp(24px,3vw,40px);font-weight:900;line-height:1.2;margin-bottom:20px}
+.contact-headline span{background:linear-gradient(135deg,var(--orange),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.contact-detail{display:flex;align-items:center;gap:14px;padding:16px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;transition:all 0.3s;text-decoration:none;color:inherit}
+.contact-detail:hover{border-color:rgba(255,107,0,0.5);transform:translateX(-4px)}
+body.rtl .contact-detail:hover{transform:translateX(4px)}
+.contact-detail-icon{width:40px;height:40px;background:rgba(255,107,0,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:18px;flex-shrink:0}
+.contact-detail-text small{display:block;font-size:11px;color:var(--gray);letter-spacing:1px;margin-bottom:2px}
+.contact-detail-text strong{font-size:15px;font-weight:700}
+
+.quote-form{background:var(--card-bg);border:1px solid var(--border);border-radius:24px;padding:32px;position:relative;overflow:hidden}
+.quote-form::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--orange),var(--blue),var(--orange));background-size:200%;animation:slide-border 3s linear infinite}
+.form-title{font-size:22px;font-weight:700;margin-bottom:8px}
+.form-sub{font-size:13px;color:var(--gray);margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;color:var(--gray);letter-spacing:1px;margin-bottom:6px;font-weight:600}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--white);font-size:14px;font-family:inherit;transition:all 0.3s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--orange);background:rgba(255,107,0,0.05);box-shadow:0 0 0 3px rgba(255,107,0,0.1)}
+.form-group select option{background:var(--charcoal);color:var(--white)}
+.form-group textarea{resize:vertical;min-height:100px}
+.upload-area{border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all 0.3s;position:relative}
+.upload-area:hover{border-color:var(--orange);background:rgba(255,107,0,0.04)}
+.upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-icon{font-size:28px;color:var(--orange);margin-bottom:8px}
+.upload-text{font-size:13px;color:var(--gray)}
+.btn-submit{width:100%;background:linear-gradient(135deg,var(--orange),var(--orange-light));color:white;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;transition:all 0.4s;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 8px 30px rgba(255,107,0,0.3);margin-top:16px}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,107,0,0.5)}
+.btn-submit i{font-size:20px}
+
+/* ======= MAP ======= */
+#map-section{background:var(--charcoal);padding:0}
+.map-container{height:400px;background:var(--dark);position:relative;overflow:hidden}
+.map-container iframe{width:100%;height:100%;border:none;filter:grayscale(80%) invert(90%) hue-rotate(180deg)}
+.map-overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(17,17,24,0.3) 0%,transparent 30%,transparent 70%,rgba(17,17,24,0.3) 100%)}
+
+/* ======= FOOTER ======= */
+footer{background:var(--black);border-top:1px solid var(--border);padding:60px 0 24px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand img{width:64px;height:64px;border-radius:50%;border:2px solid var(--orange);margin-bottom:16px;object-fit:cover}
+.footer-brand-name{font-family:var(--font-head);font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--orange),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.footer-brand-desc{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:20px}
+.social-links{display:flex;gap:10px}
+.social-link{width:38px;height:38px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:16px;transition:all 0.3s;text-decoration:none}
+.social-link:hover{background:var(--orange);border-color:var(--orange);color:white;transform:translateY(-3px)}
+.footer-col h4{font-size:14px;font-weight:700;letter-spacing:1px;color:var(--white);margin-bottom:20px;position:relative;padding-bottom:10px}
+.footer-col h4::after{content:'';position:absolute;bottom:0;right:0;width:30px;height:2px;background:var(--orange)}
+body.ltr .footer-col h4::after{right:auto;left:0}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:var(--gray);text-decoration:none;transition:color 0.3s;display:flex;align-items:center;gap:6px}
+.footer-links a:hover{color:var(--orange)}
+.footer-links a::before{content:'›';color:var(--orange);font-size:16px}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:var(--gray)}
+.footer-copy span{color:var(--orange)}
+
+/* ======= FLOATING WHATSAPP ======= */
+.wa-float{position:fixed;bottom:28px;left:28px;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+body.ltr .wa-float{left:auto;right:28px;align-items:flex-end}
+.wa-btn{width:58px;height:58px;background:linear-gradient(135deg,#25d366,#128c7e);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:white;cursor:pointer;box-shadow:0 6px 24px rgba(37,211,102,0.5);transition:all 0.4s;animation:wa-pulse 2.5s ease infinite;border:none}
+.wa-btn:hover{transform:scale(1.1);box-shadow:0 10px 40px rgba(37,211,102,0.7)}
+@keyframes wa-pulse{0%,100%{box-shadow:0 6px 24px rgba(37,211,102,0.5),0 0 0 0 rgba(37,211,102,0.4)}50%{box-shadow:0 6px 24px rgba(37,211,102,0.5),0 0 0 16px rgba(37,211,102,0)}}
+.wa-label{background:var(--black);color:white;padding:6px 14px;border-radius:99px;font-size:12px;font-weight:700;border:1px solid rgba(37,211,102,0.3);animation:wa-pulse-bg 2.5s ease infinite;white-space:nowrap}
+@keyframes wa-pulse-bg{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}50%{box-shadow:0 0 0 6px rgba(37,211,102,0)}}
+
+/* ======= MOBILE NAV ======= */
+.mobile-nav{position:fixed;inset:0;background:rgba(5,5,8,0.97);z-index:999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transform:translateY(-100%);transition:transform 0.5s cubic-bezier(0.2,0.8,0.2,1)}
+.mobile-nav.open{transform:translateY(0)}
+.mobile-nav a{font-size:24px;font-weight:700;color:var(--white);text-decoration:none;transition:color 0.3s}
+.mobile-nav a:hover{color:var(--orange)}
+.mobile-nav-close{position:absolute;top:24px;right:24px;width:44px;height:44px;background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--orange);font-size:20px}
+
+/* ======= ANIMATIONS ======= */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.fade-left{opacity:0;transform:translateX(-30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-left.visible{opacity:1;transform:translateX(0)}
+.fade-right{opacity:0;transform:translateX(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-right.visible{opacity:1;transform:translateX(0)}
+
+/* ======= RESPONSIVE ======= */
+@media(max-width:1024px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  nav{padding:0 16px}
+  .nav-links,.nav-actions .btn-quote-nav,.nav-actions .btn-lang:first-child{display:none}
+  .hamburger{display:flex}
+  .nav-actions{gap:8px}
+  .hero-btns .btn-primary,.hero-btns .btn-secondary,.hero-btns .btn-wa,.hero-btns .btn-blue{padding:12px 20px;font-size:13px}
+  .services-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gallery-item.large{grid-column:span 2}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .features-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .hero-stats{gap:20px}
+  .hero-stat .num{font-size:24px}
+  .swiper-slide img{height:280px}
+  section{padding:60px 0}
+}
+@media(max-width:480px){
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-item.large{grid-column:span 1}
+  .compare-wrap{height:260px}
+  .hero-logo{width:100px;height:100px}
+}
+</style>
 </head>
-<body>
+<body class="rtl">
 
-    <!-- فيديو الخلفية -->
-    <video autoplay muted loop playsinline>
-        <source src="Pin.mp4" type="video/mp4">
-    </video>
+<!-- ======= LOADER ======= -->
+<div id="loader">
+  <div class="loader-logo">
+    <img src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="شعار الشركة" onerror="this.style.display='none'"/>
+  </div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-text">LOADING Top Build...</div>
+</div>
 
-    <!-- الكلام -->
-    <div class="container">
-        <h1>Coming Soon</h1>
-        <div class="line"></div>
-        <p>We are working on something amazing</p>
+<!-- ======= CANVAS PARTICLES ======= -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ======= MOBILE NAV ======= -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+  <a href="#hero" onclick="closeMobileNav()"><span class="ar-text">الرئيسية</span><span class="en-text">Home</span></a>
+  <a href="#services" onclick="closeMobileNav()"><span class="ar-text">خدماتنا</span><span class="en-text">Services</span></a>
+  <a href="#gallery" onclick="closeMobileNav()"><span class="ar-text">مشاريعنا</span><span class="en-text">Projects</span></a>
+  <a href="#why" onclick="closeMobileNav()"><span class="ar-text">لماذا نحن</span><span class="en-text">Why Us</span></a>
+  <a href="#testimonials" onclick="closeMobileNav()"><span class="ar-text">آراء العملاء</span><span class="en-text">Reviews</span></a>
+  <a href="#contact" onclick="closeMobileNav()"><span class="ar-text">تواصل معنا</span><span class="en-text">Contact</span></a>
+</div>
+
+<!-- ======= NAV ======= -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="شعار إيزول بلس" onerror="this.style.display='none'"/>
+    <span class="nav-brand">Top Build</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services"><span class="ar-text">الخدمات</span><span class="en-text">Services</span></a></li>
+    <li><a href="#gallery"><span class="ar-text">المشاريع</span><span class="en-text">Projects</span></a></li>
+    <li><a href="#why"><span class="ar-text">لماذا نحن</span><span class="en-text">Why Us</span></a></li>
+    <li><a href="#testimonials"><span class="ar-text">العملاء</span><span class="en-text">Reviews</span></a></li>
+    <li><a href="#contact"><span class="ar-text">تواصل</span><span class="en-text">Contact</span></a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-lang" id="langToggle" onclick="toggleLang()">
+      <span class="ar-text">EN</span><span class="en-text">عربي</span>
+    </button>
+    <button class="btn-quote-nav" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <span class="ar-text">طلب عرض سعر</span><span class="en-text">Get Quote</span>
+    </button>
+    <div class="hamburger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ======= HERO ======= -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <!-- 3D floating shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+  <div class="shape shape-4"></div>
+
+  <div class="hero-content fade-in">
+    <!-- Animated Logo -->
+    <div class="hero-logo-wrap">
+      <div class="hero-logo-ring2"></div>
+      <div class="hero-logo-ring"></div>
+      <img class="hero-logo" src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="إيزول بلس - شركة العزل والمقاولات" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMwIiBoZWlnaHQ9IjEzMCIgdmlld0JveD0iMCAwIDEzMCAxMzAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjUiIGN5PSI2NSIgcj0iNjUiIGZpbGw9IiMxQTFBMjQiLz48dGV4dCB4PSI1MCUiIHk9IjU1JSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzMCIgZmlsbD0iI0ZGNkIwMCIgZm9udC1mYW1pbHk9IkFyaWFsIj5JUDwvdGV4dD48L3N2Zz4='"/>
     </div>
 
+    <div class="hero-badge">
+      <div class="dot"></div>
+      <span class="ar-text">رواد العزل والمقاولات</span>
+      <span class="en-text">INSULATION & CONSTRUCTION LEADERS</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line1 ar-text">حلول العزل والبناء المتكاملة</span>
+      <span class="line1 en-text">Premium Insulation &</span>
+      <span class="line2 ar-text">عزل مائي • عزل حراري • فوم • مواد بناء</span>
+      <span class="line2 en-text">Construction Solutions</span>
+    </h1>
+
+    <p class="hero-sub">
+      <span class="ar-text">خبرة أكثر من 15 عاماً في أعمال العزل المائي والحراري وعزل الأسطح والفوم ومواد البناء والتشطيب — نضمن الجودة العالية والتسليم في الوقت المحدد لكل مشاريعكم</span>
+      <span class="en-text">Over 15 years of excellence in waterproofing, thermal insulation, foam, roof protection, construction supplies & finishing materials — delivering world-class quality on every project.</span>
+    </p>
+
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <span class="ar-text">طلب عرض سعر</span>
+        <span class="en-text">Request Quote</span>
+      </button>
+      <a href="https://wa.me/201065008435" class="btn-wa" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="ar-text">واتساب مباشر</span>
+        <span class="en-text">WhatsApp</span>
+      </a>
+      <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        <i class="fas fa-th-large"></i>
+        <span class="ar-text">مشاهدة الخدمات</span>
+        <span class="en-text">View Services</span>
+      </button>
+      <button class="btn-blue" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <i class="fas fa-phone-volume"></i>
+        <span class="ar-text">التواصل مع المبيعات</span>
+        <span class="en-text">Contact Sales</span>
+      </button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num" data-count="15">0</div>
+        <div class="label"><span class="ar-text">سنة خبرة</span><span class="en-text">Years Exp.</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="num" data-count="850">0</div>
+        <div class="label"><span class="ar-text">مشروع منجز</span><span class="en-text">Projects</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="num" data-count="98">0</div>
+        <div class="label"><span class="ar-text">% رضا العملاء</span><span class="en-text">% Satisfied</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="num" data-count="500">0</div>
+        <div class="label"><span class="ar-text">عميل موثوق</span><span class="en-text">Clients</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="ar-text">اكتشف المزيد</span>
+    <span class="en-text">Scroll Down</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ======= SERVICES ======= -->
+<section id="services">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">
+        <i class="fas fa-layer-group"></i>
+        <span class="ar-text">ما نقدمه</span>
+        <span class="en-text">OUR SERVICES</span>
+      </div>
+      <h2 class="section-title">
+        <span class="ar-text">خدماتنا <span>المتخصصة</span></span>
+        <span class="en-text">Our <span>Specialized</span> Services</span>
+      </h2>
+      <div class="divider"></div>
+      <p class="section-sub">
+        <span class="ar-text">نوفر حلولاً متكاملة لجميع احتياجات العزل والبناء بأعلى معايير الجودة والضمان</span>
+        <span class="en-text">Complete solutions for all insulation and construction needs with the highest quality standards and guarantees</span>
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Card 1 -->
+      <div class="service-card animated-border fade-in">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="عزل مائي"/>
+          <div class="service-overlay"></div>
+          <div class="service-icon-wrap"><i class="fas fa-water"></i></div>
+        </div>
+        <div class="service-body">
+          <div class="service-title"><span class="ar-text">العزل المائي</span><span class="en-text">Waterproofing</span></div>
+          <div class="service-desc">
+            <span class="ar-text">حماية شاملة ضد تسربات المياه للأسطح والأساسات والحمامات والأحواض باستخدام أحدث المواد والتقنيات</span>
+            <span class="en-text">Complete protection against water leaks for roofs, foundations, bathrooms and pools using the latest materials and techniques.</span>
+          </div>
+          <div class="service-tags">
+            <span class="tag"><span class="ar-text">أسطح</span><span class="en-text">Roofs</span></span>
+            <span class="tag"><span class="ar-text">أساسات</span><span class="en-text">Foundations</span></span>
+            <span class="tag"><span class="ar-text">أحواض</span><span class="en-text">Pools</span></span>
+          </div>
+        </div>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card animated-border fade-in">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=600&q=80" alt="عزل حراري"/>
+          <div class="service-overlay"></div>
+          <div class="service-icon-wrap"><i class="fas fa-temperature-low"></i></div>
+        </div>
+        <div class="service-body">
+          <div class="service-title"><span class="ar-text">العزل الحراري</span><span class="en-text">Thermal Insulation</span></div>
+          <div class="service-desc">
+            <span class="ar-text">حلول عزل حراري متطورة لتوفير الطاقة وتحسين كفاءة التبريد والتدفئة في جميع أنواع المباني</span>
+            <span class="en-text">Advanced thermal insulation solutions for energy savings and improved cooling/heating efficiency in all building types.</span>
+          </div>
+          <div class="service-tags">
+            <span class="tag"><span class="ar-text">توفير طاقة</span><span class="en-text">Energy Saving</span></span>
+            <span class="tag"><span class="ar-text">جدران</span><span class="en-text">Walls</span></span>
+          </div>
+        </div>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card animated-border fade-in">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="فوم عزل"/>
+          <div class="service-overlay"></div>
+          <div class="service-icon-wrap" style="background:rgba(0,212,255,0.9)"><i class="fas fa-wind"></i></div>
+        </div>
+        <div class="service-body">
+          <div class="service-title"><span class="ar-text">عزل الفوم</span><span class="en-text">Foam Insulation</span></div>
+          <div class="service-desc">
+            <span class="ar-text">فوم البولي يوريثان عالي الكثافة للأسطح والجدران والمخازن المبردة مع ضمان الالتصاق الكامل وعدم التسرب</span>
+            <span class="en-text">High-density polyurethane foam for roofs, walls and cold storage with guaranteed full adhesion and no leakage.</span>
+          </div>
+          <div class="service-tags">
+            <span class="tag"><span class="ar-text">بولي يوريثان</span><span class="en-text">Polyurethane</span></span>
+            <span class="tag"><span class="ar-text">مخازن</span><span class="en-text">Warehouses</span></span>
+          </div>
+        </div>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card animated-border fade-in">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="عزل الأسطح"/>
+          <div class="service-overlay"></div>
+          <div class="service-icon-wrap" style="background:rgba(245,197,24,0.9)"><i class="fas fa-home" style="color:#333"></i></div>
+        </div>
+        <div class="service-body">
+          <div class="service-title"><span class="ar-text">حماية الأسطح</span><span class="en-text">Roof Protection</span></div>
+          <div class="service-desc">
+            <span class="ar-text">أنظمة شاملة لعزل وحماية الأسطح من الحرارة والأمطار بمواد بيتومينية ومتبلمرة متعددة الطبقات</span>
+            <span class="en-text">Comprehensive roof insulation and protection systems from heat and rain using multi-layer bituminous and polymer materials.</span>
+          </div>
+          <div class="service-tags">
+            <span class="tag"><span class="ar-text">بيتوميني</span><span class="en-text">Bituminous</span></span>
+            <span class="tag"><span class="ar-text">متبلمر</span><span class="en-text">Polymer</span></span>
+          </div>
+        </div>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card animated-border fade-in">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&q=80" alt="مواد بناء"/>
+          <div class="service-overlay"></div>
+          <div class="service-icon-wrap"><i class="fas fa-boxes"></i></div>
+        </div>
+        <div class="service-body">
+          <div class="service-title"><span class="ar-text">مستلزمات البناء</span><span class="en-text">Construction Supplies</span></div>
+          <div class="service-desc">
+            <span class="ar-text">توريد جميع مواد البناء من حديد وأسمنت ورمل وطوب وخرسانة ومستلزمات بنية تحتية بأسعار تنافسية</span>
+            <span class="en-text">Supply of all building materials including steel, cement, sand, bricks, concrete and infrastructure supplies at competitive prices.</span>
+          </div>
+          <div class="service-tags">
+            <span class="tag"><span class="ar-text">حديد</span><span class="en-text">Steel</span></span>
+            <span class="tag"><span class="ar-text">أسمنت</span><span class="en-text">Cement</span></span>
+            <span class="tag"><span class="ar-text">طوب</span><span class="en-text">Brick</span></span>
+          </div>
+        </div>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card animated-border fade-in">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="مواد تشطيب"/>
+          <div class="service-overlay"></div>
+          <div class="service-icon-wrap" style="background:rgba(0,212,255,0.9)"><i class="fas fa-paint-roller"></i></div>
+        </div>
+        <div class="service-body">
+          <div class="service-title"><span class="ar-text">مواد التشطيب</span><span class="en-text">Finishing Materials</span></div>
+          <div class="service-desc">
+            <span class="ar-text">أحدث مواد التشطيب من دهانات وبلاط وسيراميك وجبس وأعمال ديكور احترافية لجميع الفراغات</span>
+            <span class="en-text">Latest finishing materials including paints, tiles, ceramics, gypsum and professional decoration work for all spaces.</span>
+          </div>
+          <div class="service-tags">
+            <span class="tag"><span class="ar-text">دهانات</span><span class="en-text">Paints</span></span>
+            <span class="tag"><span class="ar-text">سيراميك</span><span class="en-text">Ceramics</span></span>
+          </div>
+        </div>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="service-card animated-border fade-in" style="grid-column:1/-1">
+        <div class="service-img-wrap" style="height:260px">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80" alt="مقاولات عامة"/>
+          <div class="service-overlay"></div>
+          <div class="service-icon-wrap"><i class="fas fa-hard-hat"></i></div>
+        </div>
+        <div class="service-body">
+          <div class="service-title" style="font-size:22px"><span class="ar-text">المقاولات العامة</span><span class="en-text">General Contracting</span></div>
+          <div class="service-desc">
+            <span class="ar-text">نتولى تنفيذ مشاريع البناء الكاملة من الأساسات حتى التشطيب بأعلى معايير الجودة وفي الأوقات المحددة مع فريق هندسي متخصص</span>
+            <span class="en-text">We handle complete construction projects from foundations to finishing with the highest quality standards, on schedule, with a specialized engineering team.</span>
+          </div>
+          <div class="service-tags">
+            <span class="tag"><span class="ar-text">مباني سكنية</span><span class="en-text">Residential</span></span>
+            <span class="tag"><span class="ar-text">تجاري</span><span class="en-text">Commercial</span></span>
+            <span class="tag"><span class="ar-text">صناعي</span><span class="en-text">Industrial</span></span>
+            <span class="tag"><span class="ar-text">بنية تحتية</span><span class="en-text">Infrastructure</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======= GALLERY ======= -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">
+        <i class="fas fa-images"></i>
+        <span class="ar-text">أعمالنا</span>
+        <span class="en-text">OUR PROJECTS</span>
+      </div>
+      <h2 class="section-title">
+        <span class="ar-text">معرض <span>مشاريعنا</span></span>
+        <span class="en-text">Project <span>Gallery</span></span>
+      </h2>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Main Swiper -->
+    <div class="swiper gallery-swiper fade-in">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80" alt="مشروع عزل"/></div>
+        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80" alt="مشروع بناء"/></div>
+        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" alt="مشروع فوم"/></div>
+        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=1200&q=80" alt="مشروع تشطيب"/></div>
+        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80" alt="مشروع سكني"/></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="gallery-grid fade-in">
+      <div class="gallery-item large">
+        <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&q=80" alt="مشروع 1"/>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="مشروع 2"/>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="مشروع 3"/>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=600&q=80" alt="مشروع 4"/>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="مشروع 5"/>
+      </div>
+    </div>
+
+    <!-- Before / After Compare -->
+    <div class="fade-in" style="margin-top:48px">
+      <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;text-align:center">
+        <span class="ar-text">قبل وبعد — فرق العزل</span>
+        <span class="en-text">Before & After — Insulation Difference</span>
+      </h3>
+      <p style="text-align:center;color:var(--gray);font-size:13px;margin-bottom:20px">
+        <span class="ar-text">حرك الشريط لمقارنة ما قبل وبعد العزل</span>
+        <span class="en-text">Drag the slider to compare before and after insulation</span>
+      </p>
+      <div class="compare-wrap" id="compareWrap">
+        <div class="compare-before">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80" alt="قبل"/>
+        </div>
+        <div class="compare-after" id="compareAfter">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80" alt="بعد"/>
+        </div>
+        <div class="compare-divider" id="compareDivider"></div>
+        <div class="compare-handle" id="compareHandle"><i class="fas fa-arrows-left-right"></i></div>
+        <div class="compare-label before"><span class="ar-text">قبل</span><span class="en-text">BEFORE</span></div>
+        <div class="compare-label after"><span class="ar-text">بعد</span><span class="en-text">AFTER</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= WHY US ======= -->
+<section id="why">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center">
+      <div class="section-tag" style="margin:0 auto 16px">
+        <i class="fas fa-medal"></i>
+        <span class="ar-text">تميزنا</span>
+        <span class="en-text">OUR EDGE</span>
+      </div>
+      <h2 class="section-title">
+        <span class="ar-text">لماذا <span>تختارنا؟</span></span>
+        <span class="en-text">Why <span>Choose Us?</span></span>
+      </h2>
+      <div class="divider" style="margin:16px auto"></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid fade-in">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="stat-number"><span class="count" data-target="15">0</span><span class="stat-plus">+</span></div>
+        <div class="stat-label"><span class="ar-text">سنوات الخبرة</span><span class="en-text">Years Experience</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-building"></i></div>
+        <div class="stat-number"><span class="count" data-target="850">0</span><span class="stat-plus">+</span></div>
+        <div class="stat-label"><span class="ar-text">مشروع منجز</span><span class="en-text">Projects Done</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-star"></i></div>
+        <div class="stat-number"><span class="count" data-target="98">0</span><span class="stat-plus">%</span></div>
+        <div class="stat-label"><span class="ar-text">رضا العملاء</span><span class="en-text">Client Satisfaction</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+        <div class="stat-number"><span class="count" data-target="24">0</span><span class="stat-plus">h</span></div>
+        <div class="stat-label"><span class="ar-text">وقت الاستجابة</span><span class="en-text">Fast Response</span></div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="features-grid fade-in">
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+        <div>
+          <div class="feature-title"><span class="ar-text">جودة معتمدة دولياً</span><span class="en-text">Internationally Certified Quality</span></div>
+          <div class="feature-desc"><span class="ar-text">نستخدم مواد عالية الجودة معتمدة دولياً مع ضمان شامل على جميع أعمال العزل والبناء</span><span class="en-text">We use internationally certified high-quality materials with comprehensive warranties on all insulation and construction work.</span></div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-users-cog"></i></div>
+        <div>
+          <div class="feature-title"><span class="ar-text">فريق هندسي متخصص</span><span class="en-text">Specialized Engineering Team</span></div>
+          <div class="feature-desc"><span class="ar-text">نمتلك فريقاً من المهندسين والفنيين المتخصصين ذوي الخبرة الواسعة في مجال العزل والمقاولات</span><span class="en-text">We have a team of specialized engineers and technicians with extensive experience in insulation and contracting.</span></div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+        <div>
+          <div class="feature-title"><span class="ar-text">ضمان شامل وطويل الأمد</span><span class="en-text">Comprehensive Long-term Warranty</span></div>
+          <div class="feature-desc"><span class="ar-text">نقدم ضمانات تصل حتى 10 سنوات على أعمال العزل مع صيانة دورية مجانية لضمان استمرارية الحماية</span><span class="en-text">We offer warranties up to 10 years on insulation works with free periodic maintenance to ensure continued protection.</span></div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+        <div>
+          <div class="feature-title"><span class="ar-text">دعم على مدار الساعة</span><span class="en-text">24/7 Customer Support</span></div>
+          <div class="feature-desc"><span class="ar-text">فريق خدمة عملاء متاح على مدار الساعة للرد على استفساراتكم وحل أي مشكلة في أسرع وقت</span><span class="en-text">Customer service team available 24/7 to answer your inquiries and resolve any issue in the fastest time.</span></div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
+        <div>
+          <div class="feature-title"><span class="ar-text">التسليم في الموعد المحدد</span><span class="en-text">On-time Delivery</span></div>
+          <div class="feature-desc"><span class="ar-text">نلتزم بالمواعيد المتفق عليها وندير مشاريعكم بكفاءة عالية لضمان تسليمها في الوقت المحدد بدون تأخير</span><span class="en-text">We commit to agreed deadlines and manage your projects with high efficiency to ensure on-time delivery without delays.</span></div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-dollar-sign"></i></div>
+        <div>
+          <div class="feature-title"><span class="ar-text">أسعار تنافسية ومرنة</span><span class="en-text">Competitive & Flexible Pricing</span></div>
+          <div class="feature-desc"><span class="ar-text">نقدم أفضل الأسعار في السوق مع خطط دفع مرنة تناسب جميع الميزانيات مع الحفاظ على أعلى معايير الجودة</span><span class="en-text">We offer the best market prices with flexible payment plans to suit all budgets while maintaining the highest quality standards.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= TESTIMONIALS ======= -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center">
+      <div class="section-tag" style="margin:0 auto 16px">
+        <i class="fas fa-comments"></i>
+        <span class="ar-text">آراء عملاؤنا</span>
+        <span class="en-text">CLIENT REVIEWS</span>
+      </div>
+      <h2 class="section-title">
+        <span class="ar-text">ماذا يقول <span>عملاؤنا</span></span>
+        <span class="en-text">What Our <span>Clients Say</span></span>
+      </h2>
+      <div class="divider" style="margin:16px auto"></div>
+    </div>
+
+    <div class="swiper testi-swiper fade-in">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-text ar-text">خدمة ممتازة وفريق محترف جداً. قاموا بعزل سقف منزلي في وقت قصير جداً والنتيجة رائعة — لم نعاني من أي تسرب منذ سنتين. أنصح بهم بشدة لكل من يحتاج خدمات عزل.</div>
+            <div class="testi-text en-text">Excellent service and a very professional team. They insulated my roof in a very short time and the result is wonderful — no leaks at all for two years. Highly recommend them for anyone needing insulation services.</div>
+            <div class="testi-author">
+              <img class="testi-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="عميل"/>
+              <div>
+                <div class="testi-name ar-text">أحمد محمد السيد</div>
+                <div class="testi-name en-text">Ahmed Mohamed</div>
+                <div class="testi-city ar-text">القاهرة، مصر</div>
+                <div class="testi-city en-text">Cairo, Egypt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-text ar-text">تعاملت معهم في مشروع عزل حراري لمصنعنا والنتيجة فاقت توقعاتنا. وفرنا أكثر من 40% من فاتورة الكهرباء. الفريق محترف والعمل دقيق ومنضبط.</div>
+            <div class="testi-text en-text">I worked with them on a thermal insulation project for our factory and the result exceeded our expectations. We saved more than 40% on our electricity bill. Professional team with precise and disciplined work.</div>
+            <div class="testi-author">
+              <img class="testi-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="عميل"/>
+              <div>
+                <div class="testi-name ar-text">خالد عبدالرحمن</div>
+                <div class="testi-name en-text">Khaled Abdelrahman</div>
+                <div class="testi-city ar-text">الإسكندرية، مصر</div>
+                <div class="testi-city en-text">Alexandria, Egypt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-text ar-text">أعمال الفوم التي قدموها للمخزن المبرد الخاص بنا ممتازة جداً. الأسعار معقولة والضمان شامل. سأتعامل معهم في جميع مشاريعي القادمة بإذن الله.</div>
+            <div class="testi-text en-text">The foam insulation they provided for our cold storage is excellent. Reasonable prices and comprehensive warranty. I will work with them on all my future projects, God willing.</div>
+            <div class="testi-author">
+              <img class="testi-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="عميل"/>
+              <div>
+                <div class="testi-name ar-text">محمد عبدالله الغامدي</div>
+                <div class="testi-name en-text">Mohamed Abdullah</div>
+                <div class="testi-city ar-text">الرياض، السعودية</div>
+                <div class="testi-city en-text">Riyadh, Saudi Arabia</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-text ar-text">شركة رائعة وخدمة من أعلى مستوى. تعاملت معهم في توريد مواد التشطيب لمشروع سكني كبير والتسليم كان في الموعد المحدد بالضبط. شكراً جزيلاً.</div>
+            <div class="testi-text en-text">Wonderful company and top-level service. I worked with them on finishing materials supply for a large residential project and delivery was exactly on time. Many thanks.</div>
+            <div class="testi-author">
+              <img class="testi-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80" alt="عميل"/>
+              <div>
+                <div class="testi-name ar-text">سامي المقرن</div>
+                <div class="testi-name en-text">Sami Al-Maqran</div>
+                <div class="testi-city ar-text">جدة، السعودية</div>
+                <div class="testi-city en-text">Jeddah, Saudi Arabia</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= CONTACT ======= -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center">
+      <div class="section-tag" style="margin:0 auto 16px">
+        <i class="fas fa-paper-plane"></i>
+        <span class="ar-text">تواصل معنا</span>
+        <span class="en-text">GET IN TOUCH</span>
+      </div>
+      <h2 class="section-title">
+        <span class="ar-text">احصل على <span>عرض سعر مجاني</span></span>
+        <span class="en-text">Get a <span>Free Quotation</span></span>
+      </h2>
+      <div class="divider" style="margin:16px auto"></div>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Info -->
+      <div class="contact-info fade-left">
+        <h3 class="contact-headline">
+          <span class="ar-text">نحن هنا <span>لخدمتكم</span></span>
+          <span class="en-text">We Are Here <span>For You</span></span>
+        </h3>
+        <p style="color:var(--gray);font-size:14px;line-height:1.8;margin-bottom:24px">
+          <span class="ar-text">أرسل لنا تفاصيل مشروعك وسيتواصل معك فريق المبيعات خلال ساعات لتقديم أفضل عرض سعر مناسب لاحتياجاتك</span>
+          <span class="en-text">Send us your project details and our sales team will contact you within hours to provide the best quote for your needs.</span>
+        </p>
+
+        <a href="tel:+201065008435" class="contact-detail">
+          <div class="contact-detail-icon"><i class="fas fa-phone"></i></div>
+          <div class="contact-detail-text">
+            <small><span class="ar-text">اتصل بنا</span><span class="en-text">CALL US</span></small>
+            <strong>+201065008435</strong>
+          </div>
+        </a>
+        <a href="https://wa.me/201065008435" class="contact-detail" target="_blank">
+          <div class="contact-detail-icon" style="background:rgba(37,211,102,0.15);color:#25d366"><i class="fab fa-whatsapp"></i></div>
+          <div class="contact-detail-text">
+            <small>WHATSAPP</small>
+            <strong>+201065008435</strong>
+          </div>
+        </a>
+        <a href="mailto:topbuildtrade@hotmail.com" class="contact-detail">
+          <div class="contact-detail-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-detail-text">
+            <small>EMAIL</small>
+            <strong>topbuildtrade@hotmail.com</strong>
+          </div>
+        </a>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-detail-text">
+            <small><span class="ar-text">عنواننا</span><span class="en-text">ADDRESS</span></small>
+            <strong><span class="ar-text">القاهرة، مصر</span><span class="en-text">Cairo, Egypt</span></strong>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="fas fa-clock"></i></div>
+          <div class="contact-detail-text">
+            <small><span class="ar-text">ساعات العمل</span><span class="en-text">WORKING HOURS</span></small>
+            <strong><span class="ar-text">السبت – الخميس: 8ص – 8م</span><span class="en-text">Sat – Thu: 8AM – 8PM</span></strong>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div style="margin-top:24px;border-radius:16px;overflow:hidden;height:180px">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" style="width:100%;height:100%;object-fit:cover" alt="فريق العمل"/>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="quote-form fade-right">
+        <div class="form-title">
+          <span class="ar-text">📋 طلب عرض سعر</span>
+          <span class="en-text">📋 Request a Quote</span>
+        </div>
+        <div class="form-sub">
+          <span class="ar-text">أملأ النموذج وسنرسل تفاصيلك مباشرة عبر واتساب</span>
+          <span class="en-text">Fill the form and we'll send your details directly via WhatsApp</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label><span class="ar-text">الاسم الكامل *</span><span class="en-text">Full Name *</span></label>
+            <input type="text" id="f-name" placeholder="أدخل اسمك الكامل / Your full name"/>
+          </div>
+          <div class="form-group">
+            <label><span class="ar-text">رقم الهاتف *</span><span class="en-text">Phone Number *</span></label>
+            <input type="tel" id="f-phone" placeholder="+20 xxx xxx xxxx"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><span class="ar-text">المدينة</span><span class="en-text">City</span></label>
+            <input type="text" id="f-city" placeholder="القاهرة / Cairo"/>
+          </div>
+          <div class="form-group">
+            <label><span class="ar-text">نوع الخدمة المطلوبة</span><span class="en-text">Service Type</span></label>
+            <select id="f-service">
+              <option value=""><span class="ar-text">اختر الخدمة</span></option>
+              <option value="waterproofing">العزل المائي / Waterproofing</option>
+              <option value="thermal">العزل الحراري / Thermal Insulation</option>
+              <option value="foam">عزل الفوم / Foam Insulation</option>
+              <option value="roof">حماية الأسطح / Roof Protection</option>
+              <option value="supplies">مستلزمات البناء / Construction Supplies</option>
+              <option value="finishing">مواد التشطيب / Finishing Materials</option>
+              <option value="contracting">المقاولات العامة / General Contracting</option>
+              <option value="other">أخرى / Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label><span class="ar-text">وصف المشروع</span><span class="en-text">Project Description</span></label>
+          <textarea id="f-desc" placeholder="صف مشروعك بالتفصيل... / Describe your project in detail..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><span class="ar-text">الوقت المفضل للتواصل</span><span class="en-text">Preferred Contact Time</span></label>
+            <select id="f-time">
+              <option value=""><span class="ar-text">اختر الوقت</span></option>
+              <option value="morning">صباحاً 8-12 / Morning 8-12</option>
+              <option value="noon">ظهراً 12-4 / Noon 12-4</option>
+              <option value="evening">مساءً 4-8 / Evening 4-8</option>
+              <option value="anytime">أي وقت / Anytime</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><span class="ar-text">رفع صور المشروع</span><span class="en-text">Upload Project Photos</span></label>
+            <div class="upload-area">
+              <input type="file" id="f-photos" accept="image/*" multiple/>
+              <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <div class="upload-text"><span class="ar-text">انقر لرفع الصور</span><span class="en-text">Click to upload photos</span></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-submit" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i>
+          <span class="ar-text">إرسال الطلب عبر واتساب</span>
+          <span class="en-text">Send Request via WhatsApp</span>
+        </button>
+
+        <p style="font-size:11px;color:var(--gray);text-align:center;margin-top:12px">
+          <span class="ar-text">سيتم فتح تطبيق واتساب مع رسالة جاهزة تحتوي على كل تفاصيل طلبك</span>
+          <span class="en-text">WhatsApp will open with a ready message containing all your request details</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= MAP ======= -->
+<div id="map-section" style="padding:60px 0;background:var(--charcoal)">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center;margin-bottom:32px">
+      <div class="section-tag" style="margin:0 auto 16px"><i class="fas fa-map-marked-alt"></i> <span class="ar-text">موقعنا</span><span class="en-text">OUR LOCATION</span></div>
+      <h2 class="section-title"><span class="ar-text">ابحث عنا على <span>الخريطة</span></span><span class="en-text">Find Us on the <span>Map</span></span></h2>
+    </div>
+    <div class="map-container fade-in" style="border-radius:20px;overflow:hidden;height:400px;border:1px solid var(--border)">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220893.6752929836!2d31.24967245!3d30.06262695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Egypt!5e0!3m2!1sen!2seg!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://i.ibb.co/FLMdwRLf/9be1efd0-2268-440e-a284-459c8f494f91.jpg" alt="إيزول بلس" onerror="this.style.display='none'"/>
+        <div class="footer-brand-name">Top Build</div>
+        <div class="footer-brand-desc">
+          <span class="ar-text">شركة رائدة في أعمال العزل والمقاولات — عزل مائي، عزل حراري، فوم، مواد بناء ومستلزمات تشطيب بأعلى معايير الجودة</span>
+          <span class="en-text">Leading company in insulation and contracting — waterproofing, thermal insulation, foam, construction supplies and finishing materials at the highest quality standards.</span>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/201065008435" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4><span class="ar-text">خدماتنا</span><span class="en-text">Services</span></h4>
+        <ul class="footer-links">
+          <li><a href="#services"><span class="ar-text">العزل المائي</span><span class="en-text">Waterproofing</span></a></li>
+          <li><a href="#services"><span class="ar-text">العزل الحراري</span><span class="en-text">Thermal Insulation</span></a></li>
+          <li><a href="#services"><span class="ar-text">عزل الفوم</span><span class="en-text">Foam Insulation</span></a></li>
+          <li><a href="#services"><span class="ar-text">حماية الأسطح</span><span class="en-text">Roof Protection</span></a></li>
+          <li><a href="#services"><span class="ar-text">مستلزمات البناء</span><span class="en-text">Construction Supplies</span></a></li>
+          <li><a href="#services"><span class="ar-text">المقاولات العامة</span><span class="en-text">General Contracting</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4><span class="ar-text">روابط مهمة</span><span class="en-text">Quick Links</span></h4>
+        <ul class="footer-links">
+          <li><a href="#hero"><span class="ar-text">الرئيسية</span><span class="en-text">Home</span></a></li>
+          <li><a href="#gallery"><span class="ar-text">معرض المشاريع</span><span class="en-text">Gallery</span></a></li>
+          <li><a href="#why"><span class="ar-text">لماذا نحن</span><span class="en-text">Why Us</span></a></li>
+          <li><a href="#testimonials"><span class="ar-text">آراء العملاء</span><span class="en-text">Reviews</span></a></li>
+          <li><a href="#contact"><span class="ar-text">تواصل معنا</span><span class="en-text">Contact</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4><span class="ar-text">تواصل معنا</span><span class="en-text">Contact</span></h4>
+        <ul class="footer-links">
+          <li><a href="tel:+201065008435"><i class="fas fa-phone" style="margin-left:4px"></i> +201065008435</a></li>
+          <li><a href="https://wa.me/201065008435"><i class="fab fa-whatsapp" style="margin-left:4px"></i> WhatsApp</a></li>
+          <li><a href="mailto:topbuildtrade@hotmail.com"><i class="fas fa-envelope" style="margin-left:4px"></i> topbuildtrade@hotmail.com</a></li>
+          <li><a href="#map-section"><i class="fas fa-map-marker-alt" style="margin-left:4px"></i> <span class="ar-text">القاهرة، مصر</span><span class="en-text">Cairo, Egypt</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2025 <span>Top Build</span> — <span class="ar-text">جميع الحقوق محفوظة</span><span class="en-text">All Rights Reserved</span>
+      </div>
+      <div class="footer-copy">
+        <span class="ar-text">بُني بـ ❤️ لخدمة عملائنا الكرام</span>
+        <span class="en-text">Built with ❤️ for our valued clients</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ======= FLOATING WHATSAPP ======= -->
+<div class="wa-float">
+  <div class="wa-label">
+    <span class="ar-text">💬 تواصل معنا الآن</span>
+    <span class="en-text">💬 Chat with Us</span>
+  </div>
+  <a href="https://wa.me/201065008435" target="_blank" class="wa-btn">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+// ======= LOADER =======
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    // Trigger hero animation
+    document.querySelectorAll('.hero-content *').forEach((el, i) => {
+      el.style.animationDelay = (i * 0.1) + 's';
+    });
+    initCounters();
+  }, 2200);
+});
+
+// ======= PARTICLES =======
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function randomBetween(a, b) { return a + Math.random() * (b - a); }
+
+  function createParticle() {
+    return {
+      x: randomBetween(0, W),
+      y: randomBetween(0, H),
+      r: randomBetween(1, 2.5),
+      dx: randomBetween(-0.3, 0.3),
+      dy: randomBetween(-0.4, -0.1),
+      opacity: randomBetween(0.1, 0.6),
+      color: Math.random() > 0.6 ? '#ff6b00' : Math.random() > 0.5 ? '#00d4ff' : '#f5c518'
+    };
+  }
+
+  for (let i = 0; i < 120; i++) particles.push(createParticle());
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.opacity;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      p.x += p.dx;
+      p.y += p.dy;
+
+      if (p.y < -10) { p.y = H + 10; p.x = randomBetween(0, W); }
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W + 10) p.x = -10;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ======= NAVBAR SCROLL =======
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ======= MOBILE NAV =======
+function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+// ======= LANGUAGE TOGGLE =======
+let currentLang = 'rtl';
+function toggleLang() {
+  currentLang = currentLang === 'rtl' ? 'ltr' : 'rtl';
+  document.body.className = currentLang;
+  document.documentElement.lang = currentLang === 'rtl' ? 'ar' : 'en';
+  document.documentElement.dir = currentLang;
+}
+
+// ======= SCROLL ANIMATIONS =======
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Trigger counters when stats section visible
+      if (e.target.closest('#why')) initCounters();
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in, .fade-left, .fade-right').forEach(el => {
+  observer.observe(el);
+});
+
+// ======= ANIMATED COUNTERS =======
+let countersStarted = false;
+function initCounters() {
+  if (countersStarted) return;
+  countersStarted = true;
+
+  document.querySelectorAll('.count, [data-count]').forEach(el => {
+    const target = parseInt(el.dataset.target || el.getAttribute('data-count'));
+    if (!target) return;
+    let current = 0;
+    const step = Math.ceil(target / 60);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current;
+      if (current >= target) clearInterval(timer);
+    }, 30);
+  });
+}
+
+// ======= SWIPERS =======
+new Swiper('.gallery-swiper', {
+  loop: true,
+  autoplay: { delay: 3500, disableOnInteraction: false },
+  pagination: { el: '.gallery-swiper .swiper-pagination', clickable: true },
+  effect: 'fade',
+  speed: 800
+});
+
+new Swiper('.testi-swiper', {
+  loop: true,
+  autoplay: { delay: 4000, disableOnInteraction: false },
+  pagination: { el: '.testi-swiper .swiper-pagination', clickable: true },
+  slidesPerView: 1,
+  spaceBetween: 24,
+  speed: 700,
+  breakpoints: {
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 }
+  }
+});
+
+// ======= BEFORE/AFTER COMPARE =======
+(function() {
+  const wrap = document.getElementById('compareWrap');
+  const after = document.getElementById('compareAfter');
+  const divider = document.getElementById('compareDivider');
+  const handle = document.getElementById('compareHandle');
+  let dragging = false;
+
+  function setPos(x) {
+    const rect = wrap.getBoundingClientRect();
+    let pct = ((x - rect.left) / rect.width) * 100;
+    pct = Math.max(5, Math.min(95, pct));
+    after.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    divider.style.left = pct + '%';
+    handle.style.left = pct + '%';
+  }
+
+  wrap.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
+  wrap.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+  window.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('mouseup', () => dragging = false);
+  window.addEventListener('touchend', () => dragging = false);
+})();
+
+// ======= WHATSAPP FORM =======
+function sendWhatsApp() {
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const city = document.getElementById('f-city').value.trim();
+  const service = document.getElementById('f-service');
+  const serviceText = service.options[service.selectedIndex].text;
+  const desc = document.getElementById('f-desc').value.trim();
+  const time = document.getElementById('f-time');
+  const timeText = time.options[time.selectedIndex].text;
+
+  if (!name || !phone) {
+    alert(document.body.classList.contains('ltr') ? 
+      'Please fill in Name and Phone fields.' : 
+      'يرجى تعبئة حقلي الاسم ورقم الهاتف على الأقل.');
+    return;
+  }
+
+  const isAr = document.body.classList.contains('rtl');
+  
+  let msg;
+  if (isAr) {
+    msg = `🏗️ *طلب عرض سعر جديد — إيزول بلس*\n\n`;
+    msg += `👤 *الاسم:* ${name}\n`;
+    msg += `📞 *الهاتف:* ${phone}\n`;
+    msg += `🏙️ *المدينة:* ${city || 'لم يُحدد'}\n`;
+    msg += `🔧 *الخدمة المطلوبة:* ${serviceText}\n`;
+    msg += `⏰ *وقت التواصل المفضل:* ${timeText}\n`;
+    msg += `📝 *تفاصيل المشروع:*\n${desc || 'لم يُذكر'}\n\n`;
+    msg += `━━━━━━━━━━━━━━━━━━\n`;
+    msg += `✅ أرجو التواصل معي في أقرب وقت ممكن. شكراً!`;
+  } else {
+    msg = `🏗️ *New Quote Request — Top Build*\n\n`;
+    msg += `👤 *Name:* ${name}\n`;
+    msg += `📞 *Phone:* ${phone}\n`;
+    msg += `🏙️ *City:* ${city || 'Not specified'}\n`;
+    msg += `🔧 *Service Needed:* ${serviceText}\n`;
+    msg += `⏰ *Preferred Contact Time:* ${timeText}\n`;
+    msg += `📝 *Project Details:*\n${desc || 'Not provided'}\n\n`;
+    msg += `━━━━━━━━━━━━━━━━━━\n`;
+    msg += `✅ Please contact me as soon as possible. Thank you!`;
+  }
+
+  const waNumber = '201065008435';
+  const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+  window.open(waUrl, '_blank');
+}
+
+// ======= PARALLAX HERO =======
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero-content');
+  const grid = document.querySelector('.hero-grid');
+  const y = window.scrollY;
+  if (hero && y < window.innerHeight) {
+    hero.style.transform = `translateY(${y * 0.25}px)`;
+    if (grid) grid.style.transform = `translateY(${y * 0.1}px)`;
+  }
+});
+
+// ======= SERVICE CARD GLOW MOUSE EFFECT =======
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(255,107,0,0.06), var(--card-bg) 60%)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.background = '';
+  });
+});
+
+// ======= SMOOTH SCROLLING FOR ALL ANCHORS =======
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
 </body>
 </html>
